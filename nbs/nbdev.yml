@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "cjm-transcript-source-select"
+  site-url: "https://cj-mills.github.io/cjm-transcript-source-select"
+  description: "FastHTML source selection component for transcript decomposition workflows, with federated database browsing, drag-drop ordering, and keyboard navigation."
+  repo-branch: main
+  repo-url: "https://github.com/cj-mills/cjm-transcript-source-select"
