@@ -65,51 +65,52 @@ graph LR
     components_source_browser --> utils
     components_source_browser --> services_source_utils
     components_source_browser --> html_ids
-    components_step_renderer --> utils
-    components_step_renderer --> components_helpers
-    components_step_renderer --> components_preview_panel
     components_step_renderer --> components_selection_queue
+    components_step_renderer --> components_preview_panel
     components_step_renderer --> components_local_files
     components_step_renderer --> components_source_browser
-    components_step_renderer --> models
+    components_step_renderer --> components_helpers
+    components_step_renderer --> utils
     components_step_renderer --> html_ids
-    routes_core --> components_source_browser
-    routes_core --> components_selection_queue
+    components_step_renderer --> models
+    routes_core --> components_step_renderer
     routes_core --> services_source
     routes_core --> models
-    routes_core --> components_step_renderer
-    routes_filtering --> components_source_browser
+    routes_core --> html_ids
+    routes_core --> components_selection_queue
+    routes_core --> components_source_browser
+    routes_filtering --> services_source
     routes_filtering --> services_source_utils
     routes_filtering --> routes_core
-    routes_filtering --> services_source
+    routes_filtering --> components_source_browser
     routes_filtering --> models
     routes_init --> routes_filtering
-    routes_init --> services_source
-    routes_init --> models
-    routes_init --> routes_queue
     routes_init --> routes_local_files
-    routes_init --> routes_core
+    routes_init --> services_source
     routes_init --> routes_tabs
-    routes_local_files --> components_local_files
-    routes_local_files --> routes_core
+    routes_init --> models
+    routes_init --> routes_core
+    routes_init --> routes_queue
     routes_local_files --> services_source
+    routes_local_files --> routes_core
     routes_local_files --> models
+    routes_local_files --> components_local_files
     routes_queue --> routes_core
-    routes_queue --> services_source
-    routes_queue --> models
-    routes_queue --> services_source_utils
     routes_queue --> components_preview_panel
-    routes_tabs --> components_local_files
+    routes_queue --> services_source
+    routes_queue --> services_source_utils
+    routes_queue --> models
     routes_tabs --> routes_local_files
-    routes_tabs --> routes_core
     routes_tabs --> components_source_browser
-    routes_tabs --> components_step_renderer
-    routes_tabs --> models
-    routes_tabs --> services_source
     routes_tabs --> services_source_utils
+    routes_tabs --> services_source
+    routes_tabs --> routes_core
+    routes_tabs --> models
+    routes_tabs --> components_local_files
+    routes_tabs --> components_step_renderer
 ```
 
-*50 cross-module dependencies detected*
+*51 cross-module dependencies detected*
 
 ## CLI Reference
 
@@ -144,13 +145,23 @@ def _get_step_state(
 ```
 
 ``` python
-def _check_duplicate_media_path(
+def _find_duplicate_media_source(
     source_service: SourceService,  # Source service for lookups
     record_id: str,  # Candidate record ID
     provider_id: str,  # Candidate provider ID
     selected_sources: List[Dict[str, str]],  # Current selections
-) -> bool:  # True if adding would duplicate an audio file
-    "Check if adding a source would duplicate an already-selected audio file."
+) -> Optional[Dict[str, str]]:  # Conflicting source dict or None
+    "Find an already-selected source that shares the same audio file."
+```
+
+``` python
+def _render_duplicate_flash(
+    candidate_record_id: str,  # Record ID of the row the user clicked
+    candidate_provider_id: str,  # Provider ID of the row the user clicked
+    existing_record_id: str,  # Record ID of the conflicting selected row
+    existing_provider_id: str,  # Provider ID of the conflicting selected row
+) -> Script:  # OOB script element for flash animation
+    "Render a self-removing Script that briefly flashes two source rows with error color."
 ```
 
 ``` python

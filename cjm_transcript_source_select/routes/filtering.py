@@ -15,7 +15,7 @@ from cjm_fasthtml_interactions.core.state_store import get_session_id
 from ..models import SelectionUrls
 from cjm_transcript_source_select.routes.core import (
     WorkflowStateStore, _get_step_state, _update_step_state, _build_queue_response,
-    _check_duplicate_media_path
+    _find_duplicate_media_source, _render_duplicate_flash
 )
 from cjm_transcript_source_select.components.source_browser import (
     _render_source_list
@@ -103,10 +103,16 @@ def _handle_selection_toggle_focused(
     
     # Only check for duplicate media_path when adding (not removing)
     if not is_source_selected(record_id, provider_id, selected_sources):
-        if _check_duplicate_media_path(source_service, record_id, provider_id, selected_sources):
-            return _build_queue_response(
+        conflict = _find_duplicate_media_source(source_service, record_id, provider_id, selected_sources)
+        if conflict:
+            response = _build_queue_response(
                 state_store, workflow_id, source_service, session_id, selected_sources, urls
             )
+            flash = _render_duplicate_flash(
+                record_id, provider_id, conflict["record_id"], conflict["provider_id"]
+            )
+            parts = response if isinstance(response, tuple) else (response,)
+            return (*parts, flash)
     
     selected_sources = toggle_source_selection(record_id, provider_id, selected_sources)
     _update_step_state(state_store, workflow_id, session_id, selected_sources)

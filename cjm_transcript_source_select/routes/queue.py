@@ -15,7 +15,7 @@ from cjm_fasthtml_interactions.core.state_store import get_session_id
 from ..models import SelectionUrls
 from cjm_transcript_source_select.routes.core import (
     WorkflowStateStore, _get_step_state, _update_step_state, _build_queue_response,
-    _check_duplicate_media_path
+    _find_duplicate_media_source, _render_duplicate_flash
 )
 from cjm_transcript_source_select.components.preview_panel import (
     _render_preview_panel
@@ -48,10 +48,21 @@ def _handle_selection_add(
     )
     
     if not already_selected:
-        # Reject if another source with the same audio file is already queued
-        if not _check_duplicate_media_path(source_service, record_id, provider_id, selected_sources):
-            selected_sources.append({"record_id": record_id, "provider_id": provider_id})
-            _update_step_state(state_store, workflow_id, session_id, selected_sources)
+        # Check for duplicate audio source
+        conflict = _find_duplicate_media_source(source_service, record_id, provider_id, selected_sources)
+        if conflict:
+            # Reject with flash feedback on both rows
+            response = _build_queue_response(
+                state_store, workflow_id, source_service, session_id, selected_sources, urls
+            )
+            flash = _render_duplicate_flash(
+                record_id, provider_id, conflict["record_id"], conflict["provider_id"]
+            )
+            parts = response if isinstance(response, tuple) else (response,)
+            return (*parts, flash)
+        
+        selected_sources.append({"record_id": record_id, "provider_id": provider_id})
+        _update_step_state(state_store, workflow_id, session_id, selected_sources)
     
     return _build_queue_response(state_store, workflow_id, source_service, session_id, selected_sources, urls)
 

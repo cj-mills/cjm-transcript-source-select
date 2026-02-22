@@ -39,6 +39,7 @@ from cjm_fasthtml_tailwind.utilities.interactivity import cursor
 from cjm_fasthtml_tailwind.utilities.flexbox_and_grid import (
     flex_display, flex_direction, justify, items, gap, grow
 )
+from cjm_fasthtml_tailwind.utilities.transitions_and_animation import transition, duration
 from cjm_fasthtml_tailwind.core.base import combine_classes
 
 # Local imports
@@ -177,7 +178,9 @@ def _render_source_row(
         cls=combine_classes(
             bg_dui.primary.opacity(10) if is_selected else "",
             bg_dui.base_200.hover,
-            cursor.pointer
+            cursor.pointer,
+            transition.colors,
+            duration(200)
         ),
         tabindex="0",
         data_selectable="true",

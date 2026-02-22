@@ -6,11 +6,14 @@
 __all__ = ['DEBUG_SELECTION_STATE', 'WorkflowStateStore']
 
 # %% ../../nbs/routes/core.ipynb #sel-core-imports
-from typing import List, Dict, Any, Tuple, Union
+from typing import List, Dict, Any, Optional, Tuple, Union
+
+from fasthtml.common import Script
 
 from cjm_workflow_state.state_store import SQLiteWorkflowStateStore
 
 from ..models import SelectionUrls
+from ..html_ids import SelectionHtmlIds
 from cjm_transcript_source_select.components.source_browser import (
     _render_source_list
 )
@@ -39,21 +42,47 @@ def _get_step_state(
     step_states = workflow_state.get("step_states", {})
     return step_states.get("selection", {})
 
-def _check_duplicate_media_path(
+def _find_duplicate_media_source(
     source_service: SourceService,  # Source service for lookups
     record_id: str,  # Candidate record ID
     provider_id: str,  # Candidate provider ID
     selected_sources: List[Dict[str, str]],  # Current selections
-) -> bool:  # True if adding would duplicate an audio file
-    """Check if adding a source would duplicate an already-selected audio file."""
+) -> Optional[Dict[str, str]]:  # Conflicting source dict or None
+    """Find an already-selected source that shares the same audio file."""
     candidate = source_service.get_transcription_by_id(record_id, provider_id)
     if not candidate or not candidate.media_path:
-        return False
+        return None
     for s in selected_sources:
         existing = source_service.get_transcription_by_id(s["record_id"], s["provider_id"])
         if existing and existing.media_path == candidate.media_path:
-            return True
-    return False
+            return s
+    return None
+
+def _render_duplicate_flash(
+    candidate_record_id: str,  # Record ID of the row the user clicked
+    candidate_provider_id: str,  # Provider ID of the row the user clicked
+    existing_record_id: str,  # Record ID of the conflicting selected row
+    existing_provider_id: str,  # Provider ID of the conflicting selected row
+) -> Script:  # OOB script element for flash animation
+    """Render a self-removing Script that briefly flashes two source rows with error color."""
+    row1 = SelectionHtmlIds.source_row(candidate_record_id, candidate_provider_id)
+    row2 = SelectionHtmlIds.source_row(existing_record_id, existing_provider_id)
+    return Script(f"""
+(function() {{
+    var s = document.currentScript;
+    var r1 = document.getElementById('{row1}');
+    var r2 = document.getElementById('{row2}');
+    [r1, r2].forEach(function(r) {{
+        if (r) {{ r.classList.add('bg-error'); }}
+    }});
+    setTimeout(function() {{
+        [r1, r2].forEach(function(r) {{
+            if (r) {{ r.classList.remove('bg-error'); }}
+        }});
+        if (s) {{ s.remove(); }}
+    }}, 400);
+}})();
+""")
 
 # %% ../../nbs/routes/core.ipynb #3zll5oy1hsc
 def _get_active_source_tab(
