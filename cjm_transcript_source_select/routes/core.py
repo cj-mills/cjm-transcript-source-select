@@ -39,6 +39,22 @@ def _get_step_state(
     step_states = workflow_state.get("step_states", {})
     return step_states.get("selection", {})
 
+def _check_duplicate_media_path(
+    source_service: SourceService,  # Source service for lookups
+    record_id: str,  # Candidate record ID
+    provider_id: str,  # Candidate provider ID
+    selected_sources: List[Dict[str, str]],  # Current selections
+) -> bool:  # True if adding would duplicate an audio file
+    """Check if adding a source would duplicate an already-selected audio file."""
+    candidate = source_service.get_transcription_by_id(record_id, provider_id)
+    if not candidate or not candidate.media_path:
+        return False
+    for s in selected_sources:
+        existing = source_service.get_transcription_by_id(s["record_id"], s["provider_id"])
+        if existing and existing.media_path == candidate.media_path:
+            return True
+    return False
+
 # %% ../../nbs/routes/core.ipynb #3zll5oy1hsc
 def _get_active_source_tab(
     state_store: WorkflowStateStore,  # The workflow state store

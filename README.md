@@ -62,51 +62,51 @@ graph LR
     components_local_files --> html_ids
     components_preview_panel --> html_ids
     components_selection_queue --> html_ids
-    components_source_browser --> services_source_utils
     components_source_browser --> utils
+    components_source_browser --> services_source_utils
     components_source_browser --> html_ids
-    components_step_renderer --> components_helpers
-    components_step_renderer --> components_source_browser
     components_step_renderer --> utils
+    components_step_renderer --> components_helpers
     components_step_renderer --> components_preview_panel
-    components_step_renderer --> html_ids
-    components_step_renderer --> components_local_files
     components_step_renderer --> components_selection_queue
+    components_step_renderer --> components_local_files
+    components_step_renderer --> components_source_browser
     components_step_renderer --> models
-    routes_core --> components_step_renderer
-    routes_core --> models
-    routes_core --> components_selection_queue
+    components_step_renderer --> html_ids
     routes_core --> components_source_browser
+    routes_core --> components_selection_queue
     routes_core --> services_source
-    routes_filtering --> routes_core
-    routes_filtering --> services_source_utils
-    routes_filtering --> models
+    routes_core --> models
+    routes_core --> components_step_renderer
     routes_filtering --> components_source_browser
+    routes_filtering --> services_source_utils
+    routes_filtering --> routes_core
     routes_filtering --> services_source
+    routes_filtering --> models
+    routes_init --> routes_filtering
+    routes_init --> services_source
+    routes_init --> models
     routes_init --> routes_queue
     routes_init --> routes_local_files
-    routes_init --> models
-    routes_init --> routes_filtering
-    routes_init --> routes_tabs
-    routes_init --> services_source
     routes_init --> routes_core
+    routes_init --> routes_tabs
     routes_local_files --> components_local_files
     routes_local_files --> routes_core
     routes_local_files --> services_source
     routes_local_files --> models
     routes_queue --> routes_core
-    routes_queue --> services_source_utils
-    routes_queue --> models
-    routes_queue --> components_preview_panel
     routes_queue --> services_source
-    routes_tabs --> routes_local_files
+    routes_queue --> models
+    routes_queue --> services_source_utils
+    routes_queue --> components_preview_panel
     routes_tabs --> components_local_files
-    routes_tabs --> services_source_utils
+    routes_tabs --> routes_local_files
     routes_tabs --> routes_core
     routes_tabs --> components_source_browser
-    routes_tabs --> models
     routes_tabs --> components_step_renderer
+    routes_tabs --> models
     routes_tabs --> services_source
+    routes_tabs --> services_source_utils
 ```
 
 *50 cross-module dependencies detected*
@@ -141,6 +141,16 @@ def _get_step_state(
     session_id: str  # Session identifier string
 ) -> Dict[str, Any]:  # Step state dictionary
     "Get the selection step state from the workflow state store."
+```
+
+``` python
+def _check_duplicate_media_path(
+    source_service: SourceService,  # Source service for lookups
+    record_id: str,  # Candidate record ID
+    provider_id: str,  # Candidate provider ID
+    selected_sources: List[Dict[str, str]],  # Current selections
+) -> bool:  # True if adding would duplicate an audio file
+    "Check if adding a source would duplicate an already-selected audio file."
 ```
 
 ``` python
@@ -615,6 +625,7 @@ def _handle_selection_remove(
     request,  # FastHTML request object
     sess,  # FastHTML session object
     record_id: str,  # Job ID to remove
+    provider_id: str,  # Plugin name for the source
     urls: SelectionUrls,  # URL bundle for rendering
 ):  # Queue component with OOB stats, optionally with OOB source list
     "Remove a source from the selection queue."
@@ -655,7 +666,7 @@ def _handle_selection_select_all(
     grouping_mode: str,  # Current grouping mode: "media_path" or "batch_id"
     urls: SelectionUrls,  # URL bundle for rendering
 ):  # Queue component with OOB stats, optionally with OOB source list
-    "Select all transcriptions for a given group."
+    "Select all transcriptions for a given group, skipping duplicate audio sources."
 ```
 
 ``` python
@@ -1045,6 +1056,7 @@ from cjm_transcript_source_select.services.source_utils import (
     group_transcriptions,
     group_transcriptions_by_audio,
     is_source_selected,
+    get_selected_media_paths,
     filter_transcriptions,
     select_all_in_group,
     toggle_source_selection,
@@ -1090,9 +1102,18 @@ def group_transcriptions_by_audio(
 ``` python
 def is_source_selected(
     record_id: str,  # Job ID to check
+    provider_id: str,  # Provider ID to check
     selected_sources: List[Dict[str, str]]  # List of selected sources
 ) -> bool:  # True if source is selected
-    "Check if a source is in the selected list."
+    "Check if a source is in the selected list by (record_id, provider_id) pair."
+```
+
+``` python
+def get_selected_media_paths(
+    selected_sources: List[Dict[str, str]],  # Current selections (record_id, provider_id)
+    all_transcriptions: List[Dict[str, Any]],  # All available transcription records
+) -> Set[str]:  # Media paths already represented in selections
+    "Get the set of media_paths for currently selected sources."
 ```
 
 ``` python
@@ -1109,6 +1130,7 @@ def select_all_in_group(
     group_key: str,  # Group key to match against
     grouping_mode: str,  # Grouping mode: "media_path" or "batch_id"
     selected_sources: List[Dict[str, str]],  # Current selections
+    excluded_media_paths: Optional[Set[str]] = None,  # Media paths to skip (already selected)
 ) -> List[Dict[str, str]]:  # Updated selections with new items appended
     "Add all transcriptions matching a group key to the selection list, skipping duplicates."
 ```
@@ -1119,7 +1141,7 @@ def toggle_source_selection(
     provider_id: str,  # Plugin name for the source
     selected_sources: List[Dict[str, str]],  # Current selections
 ) -> List[Dict[str, str]]:  # Updated selections
-    "Toggle a source in or out of the selection list."
+    "Toggle a source in or out of the selection list by (record_id, provider_id) pair."
 ```
 
 ``` python

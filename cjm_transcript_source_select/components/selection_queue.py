@@ -73,7 +73,7 @@ def _render_queue_item(
             lucide_icon("x", size=4, cls=str(text_dui.base_content.opacity(60))),
             cls=combine_classes(btn, btn_styles.ghost, btn_sizes.xs, m.l(1)),
             hx_post=remove_url,
-            hx_vals=json.dumps({"record_id": record_id}),
+            hx_vals=json.dumps({"record_id": record_id, "provider_id": provider_id}),
             hx_target=SelectionHtmlIds.as_selector(SelectionHtmlIds.QUEUE_CONTAINER),
             hx_swap="outerHTML",
             data_action="remove",

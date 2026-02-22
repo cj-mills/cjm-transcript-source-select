@@ -14,14 +14,15 @@ from cjm_fasthtml_interactions.core.state_store import get_session_id
 
 from ..models import SelectionUrls
 from cjm_transcript_source_select.routes.core import (
-    WorkflowStateStore, _get_step_state, _update_step_state, _build_queue_response
+    WorkflowStateStore, _get_step_state, _update_step_state, _build_queue_response,
+    _check_duplicate_media_path
 )
 from cjm_transcript_source_select.components.preview_panel import (
     _render_preview_panel
 )
 from ..services.source import SourceService
 from cjm_transcript_source_select.services.source_utils import (
-    select_all_in_group, reorder_sources
+    select_all_in_group, reorder_sources, get_selected_media_paths
 )
 
 # %% ../../nbs/routes/queue.ipynb #a5934339
@@ -40,10 +41,17 @@ def _handle_selection_add(
     step_state = _get_step_state(state_store, workflow_id, session_id)
     selected_sources = step_state.get("selected_sources", [])
     
-    # Check if already selected
-    if not any(s.get("record_id") == record_id for s in selected_sources):
-        selected_sources.append({"record_id": record_id, "provider_id": provider_id})
-        _update_step_state(state_store, workflow_id, session_id, selected_sources)
+    # Check if already selected by (record_id, provider_id) pair
+    already_selected = any(
+        s.get("record_id") == record_id and s.get("provider_id") == provider_id
+        for s in selected_sources
+    )
+    
+    if not already_selected:
+        # Reject if another source with the same audio file is already queued
+        if not _check_duplicate_media_path(source_service, record_id, provider_id, selected_sources):
+            selected_sources.append({"record_id": record_id, "provider_id": provider_id})
+            _update_step_state(state_store, workflow_id, session_id, selected_sources)
     
     return _build_queue_response(state_store, workflow_id, source_service, session_id, selected_sources, urls)
 
@@ -55,6 +63,7 @@ def _handle_selection_remove(
     request,  # FastHTML request object
     sess,  # FastHTML session object
     record_id: str,  # Job ID to remove
+    provider_id: str,  # Plugin name for the source
     urls: SelectionUrls,  # URL bundle for rendering
 ):  # Queue component with OOB stats, optionally with OOB source list
     """Remove a source from the selection queue."""
@@ -62,8 +71,11 @@ def _handle_selection_remove(
     step_state = _get_step_state(state_store, workflow_id, session_id)
     selected_sources = step_state.get("selected_sources", [])
     
-    # Remove the item
-    selected_sources = [s for s in selected_sources if s.get("record_id") != record_id]
+    # Remove by (record_id, provider_id) pair
+    selected_sources = [
+        s for s in selected_sources
+        if not (s.get("record_id") == record_id and s.get("provider_id") == provider_id)
+    ]
     _update_step_state(state_store, workflow_id, session_id, selected_sources)
     
     return _build_queue_response(state_store, workflow_id, source_service, session_id, selected_sources, urls)
@@ -120,13 +132,17 @@ def _handle_selection_select_all(
     grouping_mode: str,  # Current grouping mode: "media_path" or "batch_id"
     urls: SelectionUrls,  # URL bundle for rendering
 ):  # Queue component with OOB stats, optionally with OOB source list
-    """Select all transcriptions for a given group."""
+    """Select all transcriptions for a given group, skipping duplicate audio sources."""
     session_id = get_session_id(sess)
     step_state = _get_step_state(state_store, workflow_id, session_id)
     selected_sources = step_state.get("selected_sources", [])
     
     all_transcriptions = source_service.query_transcriptions(limit=500)
-    selected_sources = select_all_in_group(all_transcriptions, group_key, grouping_mode, selected_sources)
+    excluded = get_selected_media_paths(selected_sources, all_transcriptions)
+    selected_sources = select_all_in_group(
+        all_transcriptions, group_key, grouping_mode, selected_sources,
+        excluded_media_paths=excluded,
+    )
     
     _update_step_state(state_store, workflow_id, session_id, selected_sources=selected_sources)
     
@@ -180,11 +196,11 @@ def init_queue_router(
         )
 
     @router
-    def remove(request, sess, record_id: str):
+    def remove(request, sess, record_id: str, provider_id: str):
         """Remove a source from the selection queue."""
         return _handle_selection_remove(
             state_store, workflow_id, source_service,
-            request, sess, record_id, urls=urls,
+            request, sess, record_id, provider_id, urls=urls,
         )
 
     @router

@@ -4,11 +4,12 @@
 
 # %% auto #0
 __all__ = ['extract_batch_id', 'extract_model_name', 'group_transcriptions', 'group_transcriptions_by_audio',
-           'is_source_selected', 'filter_transcriptions', 'select_all_in_group', 'toggle_source_selection',
-           'reorder_item', 'reorder_sources', 'calculate_next_tab', 'check_audio_exists', 'validate_browse_path']
+           'is_source_selected', 'get_selected_media_paths', 'filter_transcriptions', 'select_all_in_group',
+           'toggle_source_selection', 'reorder_item', 'reorder_sources', 'calculate_next_tab', 'check_audio_exists',
+           'validate_browse_path']
 
 # %% ../../nbs/services/source_utils.ipynb #su-imports
-from typing import Any, List, Dict
+from typing import Any, List, Dict, Optional, Set
 from pathlib import Path
 import json
 
@@ -85,10 +86,27 @@ def group_transcriptions_by_audio(
 # %% ../../nbs/services/source_utils.ipynb #su-is-source-selected
 def is_source_selected(
     record_id: str,  # Job ID to check
+    provider_id: str,  # Provider ID to check
     selected_sources: List[Dict[str, str]]  # List of selected sources
 ) -> bool:  # True if source is selected
-    """Check if a source is in the selected list."""
-    return any(s.get("record_id") == record_id for s in selected_sources)
+    """Check if a source is in the selected list by (record_id, provider_id) pair."""
+    return any(
+        s.get("record_id") == record_id and s.get("provider_id") == provider_id
+        for s in selected_sources
+    )
+
+# %% ../../nbs/services/source_utils.ipynb #yt3azuiiy3g
+def get_selected_media_paths(
+    selected_sources: List[Dict[str, str]],  # Current selections (record_id, provider_id)
+    all_transcriptions: List[Dict[str, Any]],  # All available transcription records
+) -> Set[str]:  # Media paths already represented in selections
+    """Get the set of media_paths for currently selected sources."""
+    selected_keys = {(s.get("record_id"), s.get("provider_id")) for s in selected_sources}
+    return {
+        t.get("media_path") for t in all_transcriptions
+        if (t.get("record_id"), t.get("provider_id")) in selected_keys
+        and t.get("media_path")
+    }
 
 # %% ../../nbs/services/source_utils.ipynb #tg25xqgkaa
 def filter_transcriptions(
@@ -113,6 +131,7 @@ def select_all_in_group(
     group_key: str,  # Group key to match against
     grouping_mode: str,  # Grouping mode: "media_path" or "batch_id"
     selected_sources: List[Dict[str, str]],  # Current selections
+    excluded_media_paths: Optional[Set[str]] = None,  # Media paths to skip (already selected)
 ) -> List[Dict[str, str]]:  # Updated selections with new items appended
     """Add all transcriptions matching a group key to the selection list, skipping duplicates."""
     # Filter transcriptions by group key
@@ -121,14 +140,24 @@ def select_all_in_group(
     else:
         matching = [t for t in transcriptions if t.get("media_path") == group_key]
     
-    # Deduplicate against existing selections
-    existing_record_ids = {s.get("record_id") for s in selected_sources}
+    # Deduplicate against existing selections using (record_id, provider_id) pairs
+    existing_keys = {(s.get("record_id"), s.get("provider_id")) for s in selected_sources}
+    used_paths = set(excluded_media_paths) if excluded_media_paths else set()
     result = list(selected_sources)
     for t in matching:
         record_id = t.get("record_id")
-        if record_id and record_id not in existing_record_ids:
-            result.append({"record_id": record_id, "provider_id": t.get("provider_id", "")})
-            existing_record_ids.add(record_id)
+        provider_id = t.get("provider_id", "")
+        media_path = t.get("media_path")
+        key = (record_id, provider_id)
+        if not record_id or key in existing_keys:
+            continue
+        # Skip if media_path already represented
+        if excluded_media_paths is not None and media_path and media_path in used_paths:
+            continue
+        result.append({"record_id": record_id, "provider_id": provider_id})
+        existing_keys.add(key)
+        if media_path:
+            used_paths.add(media_path)
     
     return result
 
@@ -138,9 +167,11 @@ def toggle_source_selection(
     provider_id: str,  # Plugin name for the source
     selected_sources: List[Dict[str, str]],  # Current selections
 ) -> List[Dict[str, str]]:  # Updated selections
-    """Toggle a source in or out of the selection list."""
-    if any(s.get("record_id") == record_id for s in selected_sources):
-        return [s for s in selected_sources if s.get("record_id") != record_id]
+    """Toggle a source in or out of the selection list by (record_id, provider_id) pair."""
+    if any(s.get("record_id") == record_id and s.get("provider_id") == provider_id
+           for s in selected_sources):
+        return [s for s in selected_sources
+                if not (s.get("record_id") == record_id and s.get("provider_id") == provider_id)]
     else:
         return selected_sources + [{"record_id": record_id, "provider_id": provider_id}]
 

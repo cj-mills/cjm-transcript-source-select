@@ -154,7 +154,7 @@ def _render_source_row(
                 hx_vals=json.dumps({"record_id": record_id, "provider_id": provider_id}),
                 hx_target=SelectionHtmlIds.as_selector(SelectionHtmlIds.QUEUE_CONTAINER),
                 hx_swap="outerHTML",
-                name=f"source_{record_id}"
+                name=f"source_{provider_id}_{record_id}"
             ),
             cls=str(w(12))
         ),
@@ -260,7 +260,9 @@ def _render_source_list(
         
         # Add record rows
         for record in records:
-            is_selected = is_source_selected(record.get("record_id", ""), selected_sources)
+            is_selected = is_source_selected(
+                record.get("record_id", ""), record.get("provider_id", ""), selected_sources
+            )
             table_rows.append(_render_source_row(
                 record, is_selected, add_url, remove_url, preview_url,
                 is_first=is_first_record
