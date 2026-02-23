@@ -1,0 +1,647 @@
+[
+  {
+    "objectID": "html_ids.html",
+    "href": "html_ids.html",
+    "title": "html_ids",
+    "section": "",
+    "text": "source\n\nSelectionHtmlIds\n\ndef SelectionHtmlIds(\n    args:VAR_POSITIONAL, kwargs:VAR_KEYWORD\n):\n\nHTML ID constants for Phase 1: Source Selection & Ordering.",
+    "crumbs": [
+      "html_ids"
+    ]
+  },
+  {
+    "objectID": "routes/queue.html#reorderclear-handlers",
+    "href": "routes/queue.html#reorderclear-handlers",
+    "title": "queue",
+    "section": "Reorder/Clear Handlers",
+    "text": "Reorder/Clear Handlers",
+    "crumbs": [
+      "routes",
+      "queue"
+    ]
+  },
+  {
+    "objectID": "routes/queue.html#select-all-handler",
+    "href": "routes/queue.html#select-all-handler",
+    "title": "queue",
+    "section": "Select All Handler",
+    "text": "Select All Handler",
+    "crumbs": [
+      "routes",
+      "queue"
+    ]
+  },
+  {
+    "objectID": "routes/queue.html#preview-handler",
+    "href": "routes/queue.html#preview-handler",
+    "title": "queue",
+    "section": "Preview Handler",
+    "text": "Preview Handler",
+    "crumbs": [
+      "routes",
+      "queue"
+    ]
+  },
+  {
+    "objectID": "routes/queue.html#router",
+    "href": "routes/queue.html#router",
+    "title": "queue",
+    "section": "Router",
+    "text": "Router\n\nsource\n\ninit_queue_router\n\ndef init_queue_router(\n    state_store:SQLiteWorkflowStateStore, # The workflow state store\n    workflow_id:str, # The workflow identifier\n    source_service:SourceService, # The source service for queries\n    prefix:str, # Route prefix (e.g., \"/workflow/selection/queue\")\n    urls:SelectionUrls, # URL bundle for rendering (populated after all routers created)\n)-&gt;Tuple: # (router, route_dict)\n\nInitialize queue management routes.",
+    "crumbs": [
+      "routes",
+      "queue"
+    ]
+  },
+  {
+    "objectID": "routes/tabs.html#router",
+    "href": "routes/tabs.html#router",
+    "title": "tabs",
+    "section": "Router",
+    "text": "Router\n\nsource\n\ninit_tabs_router\n\ndef init_tabs_router(\n    state_store:SQLiteWorkflowStateStore, # The workflow state store\n    workflow_id:str, # The workflow identifier\n    source_service:SourceService, # The source service for queries\n    prefix:str, # Route prefix (e.g., \"/workflow/selection/tabs\")\n    urls:SelectionUrls, # URL bundle for rendering\n)-&gt;Tuple: # (router, route_dict)\n\nInitialize tab switching routes.",
+    "crumbs": [
+      "routes",
+      "tabs"
+    ]
+  },
+  {
+    "objectID": "routes/local_files.html#addremove-external-source-handlers",
+    "href": "routes/local_files.html#addremove-external-source-handlers",
+    "title": "local_files",
+    "section": "Add/Remove External Source Handlers",
+    "text": "Add/Remove External Source Handlers",
+    "crumbs": [
+      "routes",
+      "local_files"
+    ]
+  },
+  {
+    "objectID": "routes/local_files.html#router",
+    "href": "routes/local_files.html#router",
+    "title": "local_files",
+    "section": "Router",
+    "text": "Router\n\nsource\n\ninit_local_files_router\n\ndef init_local_files_router(\n    state_store:SQLiteWorkflowStateStore, # The workflow state store\n    workflow_id:str, # The workflow identifier\n    source_service:SourceService, # The source service for external db ops\n    prefix:str, # Route prefix (e.g., \"/workflow/selection/local_files\")\n    urls:SelectionUrls, # URL bundle for rendering\n)-&gt;Tuple: # (router, route_dict)\n\nInitialize local files browser routes.",
+    "crumbs": [
+      "routes",
+      "local_files"
+    ]
+  },
+  {
+    "objectID": "utils.html",
+    "href": "utils.html",
+    "title": "utils",
+    "section": "",
+    "text": "source\n\n\n\ndef count_words(\n    text:str, # Text to count words in\n)-&gt;int: # Word count\n\nCount the number of whitespace-delimited words in text.",
+    "crumbs": [
+      "utils"
+    ]
+  },
+  {
+    "objectID": "utils.html#word-operations",
+    "href": "utils.html#word-operations",
+    "title": "utils",
+    "section": "",
+    "text": "source\n\n\n\ndef count_words(\n    text:str, # Text to count words in\n)-&gt;int: # Word count\n\nCount the number of whitespace-delimited words in text.",
+    "crumbs": [
+      "utils"
+    ]
+  },
+  {
+    "objectID": "utils.html#date-formatting",
+    "href": "utils.html#date-formatting",
+    "title": "utils",
+    "section": "Date Formatting",
+    "text": "Date Formatting\n\nsource\n\nformat_date\n\ndef format_date(\n    created_at:str, # ISO date string, Unix timestamp, or similar\n)-&gt;str: # Formatted date for display\n\nFormat a date string for human-readable display (e.g., ‘Jan 20, 2026’).",
+    "crumbs": [
+      "utils"
+    ]
+  },
+  {
+    "objectID": "utils.html#filename-formatting",
+    "href": "utils.html#filename-formatting",
+    "title": "utils",
+    "section": "Filename Formatting",
+    "text": "Filename Formatting\n\nsource\n\nformat_audio_filename\n\ndef format_audio_filename(\n    audio_path:str, # Full path to audio file\n)-&gt;str: # Shortened filename for display\n\nExtract and format the filename from a path.",
+    "crumbs": [
+      "utils"
+    ]
+  },
+  {
+    "objectID": "utils.html#tests",
+    "href": "utils.html#tests",
+    "title": "utils",
+    "section": "Tests",
+    "text": "Tests\n\nassert count_words(\"\") == 0\nassert count_words(\"hello\") == 1\nassert count_words(\"The art of war\") == 4\nprint(\"count_words tests passed\")\n\n\nassert format_date(\"\") == \"Unknown\"\nassert format_date(None) == \"Unknown\"\nassert format_date(\"2026-01-20\") == \"Jan 20, 2026\"\nassert format_date(\"2026-01-20 14:30:00\") == \"Jan 20, 2026\"\nprint(\"format_date tests passed\")\n\n\nassert format_audio_filename(\"/home/user/audio/test.wav\") == \"test.wav\"\nassert format_audio_filename(\"Unknown\") == \"Unknown Source\"\nassert format_audio_filename(\"\") == \"Unknown Source\"\nprint(\"format_audio_filename tests passed\")",
+    "crumbs": [
+      "utils"
+    ]
+  },
+  {
+    "objectID": "components/step_renderer.html",
+    "href": "components/step_renderer.html",
+    "title": "step_renderer",
+    "section": "",
+    "text": "Factory functions to create keyboard navigation zones, actions, and manager for Phase 1.",
+    "crumbs": [
+      "components",
+      "step_renderer"
+    ]
+  },
+  {
+    "objectID": "components/step_renderer.html#keyboard-configuration",
+    "href": "components/step_renderer.html#keyboard-configuration",
+    "title": "step_renderer",
+    "section": "",
+    "text": "Factory functions to create keyboard navigation zones, actions, and manager for Phase 1.",
+    "crumbs": [
+      "components",
+      "step_renderer"
+    ]
+  },
+  {
+    "objectID": "components/step_renderer.html#keyboard-hints-component",
+    "href": "components/step_renderer.html#keyboard-hints-component",
+    "title": "step_renderer",
+    "section": "Keyboard Hints Component",
+    "text": "Keyboard Hints Component",
+    "crumbs": [
+      "components",
+      "step_renderer"
+    ]
+  },
+  {
+    "objectID": "components/step_renderer.html#footer-component",
+    "href": "components/step_renderer.html#footer-component",
+    "title": "step_renderer",
+    "section": "Footer Component",
+    "text": "Footer Component",
+    "crumbs": [
+      "components",
+      "step_renderer"
+    ]
+  },
+  {
+    "objectID": "components/step_renderer.html#tab-components",
+    "href": "components/step_renderer.html#tab-components",
+    "title": "step_renderer",
+    "section": "Tab Components",
+    "text": "Tab Components",
+    "crumbs": [
+      "components",
+      "step_renderer"
+    ]
+  },
+  {
+    "objectID": "components/step_renderer.html#main-step-renderer",
+    "href": "components/step_renderer.html#main-step-renderer",
+    "title": "step_renderer",
+    "section": "Main Step Renderer",
+    "text": "Main Step Renderer\n\nsource\n\nrender_selection_step\n\ndef render_selection_step(\n    sources:List, # Available source plugins\n    transcriptions:List, # Available transcription records\n    selected_sources:List, # Ordered selection\n    grouping_mode:str, # Grouping mode: \"media_path\" or \"batch_id\"\n    external_db_paths:List, # External database paths\n    file_browser_state:Dict, # Serialized BrowserState from file-browser library\n    active_tab:str, # Active tab: \"db\" or \"files\"\n    urls:SelectionUrls, # URL bundle for selection routes\n)-&gt;Any: # FastHTML component\n\nRender Phase 1: Source Selection & Ordering step with two-column layout.",
+    "crumbs": [
+      "components",
+      "step_renderer"
+    ]
+  },
+  {
+    "objectID": "components/source_browser.html#source-row",
+    "href": "components/source_browser.html#source-row",
+    "title": "source_browser",
+    "section": "Source Row",
+    "text": "Source Row",
+    "crumbs": [
+      "components",
+      "source_browser"
+    ]
+  },
+  {
+    "objectID": "components/source_browser.html#group-header",
+    "href": "components/source_browser.html#group-header",
+    "title": "source_browser",
+    "section": "Group Header",
+    "text": "Group Header",
+    "crumbs": [
+      "components",
+      "source_browser"
+    ]
+  },
+  {
+    "objectID": "components/source_browser.html#source-list",
+    "href": "components/source_browser.html#source-list",
+    "title": "source_browser",
+    "section": "Source List",
+    "text": "Source List",
+    "crumbs": [
+      "components",
+      "source_browser"
+    ]
+  },
+  {
+    "objectID": "components/source_browser.html#source-browser",
+    "href": "components/source_browser.html#source-browser",
+    "title": "source_browser",
+    "section": "Source Browser",
+    "text": "Source Browser",
+    "crumbs": [
+      "components",
+      "source_browser"
+    ]
+  },
+  {
+    "objectID": "components/local_files.html#file-browser-configuration",
+    "href": "components/local_files.html#file-browser-configuration",
+    "title": "local_files",
+    "section": "File Browser Configuration",
+    "text": "File Browser Configuration",
+    "crumbs": [
+      "components",
+      "local_files"
+    ]
+  },
+  {
+    "objectID": "components/local_files.html#external-sources-list",
+    "href": "components/local_files.html#external-sources-list",
+    "title": "local_files",
+    "section": "External Sources List",
+    "text": "External Sources List",
+    "crumbs": [
+      "components",
+      "local_files"
+    ]
+  },
+  {
+    "objectID": "components/local_files.html#local-files-browser",
+    "href": "components/local_files.html#local-files-browser",
+    "title": "local_files",
+    "section": "Local Files Browser",
+    "text": "Local Files Browser",
+    "crumbs": [
+      "components",
+      "local_files"
+    ]
+  },
+  {
+    "objectID": "services/source.html",
+    "href": "services/source.html",
+    "title": "source",
+    "section": "",
+    "text": "A SourceProvider implementation for transcription SQLite databases. Each provider instance wraps a single database file (either from a plugin or an external path).\n\nsource\n\n\n\ndef TranscriptionDBProvider(\n    db_path:str, # Path to SQLite database file\n    name:str, # Display name for this provider\n    provider_id:Optional=None, # Unique ID (defaults to db_path)\n):\n\nSourceProvider for transcription SQLite databases.",
+    "crumbs": [
+      "services",
+      "source"
+    ]
+  },
+  {
+    "objectID": "services/source.html#transcriptiondbprovider",
+    "href": "services/source.html#transcriptiondbprovider",
+    "title": "source",
+    "section": "",
+    "text": "A SourceProvider implementation for transcription SQLite databases. Each provider instance wraps a single database file (either from a plugin or an external path).\n\nsource\n\n\n\ndef TranscriptionDBProvider(\n    db_path:str, # Path to SQLite database file\n    name:str, # Display name for this provider\n    provider_id:Optional=None, # Unique ID (defaults to db_path)\n):\n\nSourceProvider for transcription SQLite databases.",
+    "crumbs": [
+      "services",
+      "source"
+    ]
+  },
+  {
+    "objectID": "services/source.html#sourceservice",
+    "href": "services/source.html#sourceservice",
+    "title": "source",
+    "section": "SourceService",
+    "text": "SourceService\nThis service provides access to transcription data from multiple sources via DuckDB federation. It queries the SQLite databases of loaded transcription plugins without loading the full plugin workers.\n\nsource\n\nSourceService\n\ndef SourceService(\n    plugin_manager:PluginManager, # Plugin manager for discovering plugin sources\n    source_categories:List=None, # Plugin categories to query (default: ['transcription'])\n    external_paths:List=None, # External database paths\n):\n\nService for federated access to content sources via providers.",
+    "crumbs": [
+      "services",
+      "source"
+    ]
+  },
+  {
+    "objectID": "services/source.html#external-database-validation",
+    "href": "services/source.html#external-database-validation",
+    "title": "source",
+    "section": "External Database Validation",
+    "text": "External Database Validation\n\nsource\n\nvalidate_and_toggle_external_db\n\ndef validate_and_toggle_external_db(\n    source_service:SourceService, # Source service for duplicate detection\n    path:str, # Path to the .db file\n    external_paths:List, # Current external database paths\n    valid_extensions:List=None, # Valid file extensions (default: VALID_DB_EXTENSIONS)\n)-&gt;Tuple: # (updated_paths, error_message or None)\n\nValidate and toggle an external database path in the external paths list.",
+    "crumbs": [
+      "services",
+      "source"
+    ]
+  },
+  {
+    "objectID": "services/source.html#tests",
+    "href": "services/source.html#tests",
+    "title": "source",
+    "section": "Tests",
+    "text": "Tests\nThe following cells demonstrate the provider architecture. TranscriptionDBProvider can be created from plugin metadata or external paths. SourceService manages multiple providers and aggregates queries.\n\n# Test TranscriptionDBProvider directly\nfrom pathlib import Path\n\n# Path to existing transcription database\nwhisper_db = \"/mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-plugin-system/.cjm/data/cjm-transcription-plugin-whisper/whisper_transcriptions.db\"\n\n# Create provider from external path\nprovider = TranscriptionDBProvider.from_external_path(whisper_db)\nprint(f\"Provider: {provider.provider_name}\")\nprint(f\"  ID: {provider.provider_id}\")\nprint(f\"  Type: {provider.provider_type}\")\nprint(f\"  Available: {provider.is_available()}\")\n\nProvider: External: whisper_transcriptions\n  ID: external:/mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-plugin-system/.cjm/data/cjm-transcription-plugin-whisper/whisper_transcriptions.db\n  Type: transcription_db\n  Available: True\n\n\n\n# Test validate_schema on valid transcription database\nis_valid, error_msg = provider.validate_schema()\nprint(f\"Schema validation: {is_valid}\")\nif not is_valid:\n    print(f\"  Error: {error_msg}\")\nelse:\n    print(f\"  Required columns found: {TranscriptionDBProvider.REQUIRED_COLUMNS}\")\n\nSchema validation: True\n  Required columns found: frozenset({'job_id', 'text', 'created_at'})\n\n\n\n# Test validate_schema on database with unsupported schema (e.g., VAD database)\nvad_db = \"/mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-plugin-system/.cjm/data/cjm-media-plugin-silero-vad/vad_jobs.db\"\nvad_provider = TranscriptionDBProvider.from_external_path(vad_db)\nif vad_provider:\n    is_valid, error_msg = vad_provider.validate_schema()\n    print(f\"VAD database schema validation: {is_valid}\")\n    print(f\"  Error: {error_msg}\")\n\nVAD database schema validation: False\n  Error: Missing 'transcriptions' table\n\n\n\n# Test provider query_records\nrecords = provider.query_records(limit=3)\nprint(f\"Found {len(records)} records from provider\")\n\nfor rec in records:\n    print(f\"\\n  record_id: {rec['record_id']}\")\n    print(f\"  provider_id: {rec['provider_id']}\")\n    print(f\"  text preview: {rec['text'][:60]}...\")\n\nFound 3 records from provider\n\n  record_id: job_9065e18d\n  provider_id: external:/mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-plugin-system/.cjm/data/cjm-transcription-plugin-whisper/whisper_transcriptions.db\n  text preview: Laying Plans Sun Tzu said, The art of war is of vital import...\n\n  record_id: job_a0b718cc\n  provider_id: external:/mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-plugin-system/.cjm/data/cjm-transcription-plugin-whisper/whisper_transcriptions.db\n  text preview: Laying Plans Sun Tzu said, The art of war is of vital import...\n\n  record_id: job_3cbae8d3\n  provider_id: external:/mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-plugin-system/.cjm/data/cjm-transcription-plugin-whisper/whisper_transcriptions.db\n  text preview: Laying Plans Sun Tzu said, The art of war is of vital import...\n\n\n\n# Test provider get_source_block\nif records:\n    block = provider.get_source_block(records[0]['record_id'])\n    if block:\n        print(f\"Retrieved SourceBlock:\")\n        print(f\"  id: {block.id}\")\n        print(f\"  provider_id: {block.provider_id}\")\n        print(f\"  text length: {len(block.text)} chars\")\n\nRetrieved SourceBlock:\n  id: job_9065e18d\n  provider_id: external:/mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-plugin-system/.cjm/data/cjm-transcription-plugin-whisper/whisper_transcriptions.db\n  text length: 3402 chars\n\n\n\n# Test SourceService with providers (backward-compatible API)\nfrom cjm_plugin_system.core.manager import PluginManager\n\n# Calculate project root from notebook location\nproject_root = Path.cwd().parent.parent\nmanifests_dir = project_root / \".cjm\" / \"manifests\"\n\n# Create plugin manager\nmanager = PluginManager(search_paths=[manifests_dir])\nmanager.discover_manifests()\nprint(f\"Discovered {len(manager.discovered)} plugins\")\n\n# Initialize service with external path (backward compatible)\nsource_service = SourceService(\n    plugin_manager=manager,\n    external_paths=[whisper_db]\n)\n\n# Check providers\nproviders = source_service.get_providers()\nprint(f\"\\nRegistered providers: {len(providers)}\")\nfor p in providers:\n    print(f\"  - {p.provider_name} ({p.provider_type})\")\n\n[PluginManager] Discovered manifest: cjm-transcription-plugin-voxtral-hf from /mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-fasthtml-workflow-transcript-decomp/.cjm/manifests/cjm-transcription-plugin-voxtral-hf.json\n[PluginManager] Discovered manifest: cjm-system-monitor-nvidia from /mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-fasthtml-workflow-transcript-decomp/.cjm/manifests/cjm-system-monitor-nvidia.json\n[PluginManager] Discovered manifest: cjm-transcription-plugin-whisper from /mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-fasthtml-workflow-transcript-decomp/.cjm/manifests/cjm-transcription-plugin-whisper.json\n[PluginManager] Discovered manifest: cjm-media-plugin-silero-vad from /mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-fasthtml-workflow-transcript-decomp/.cjm/manifests/cjm-media-plugin-silero-vad.json\n[PluginManager] Discovered manifest: cjm-graph-plugin-sqlite from /mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-fasthtml-workflow-transcript-decomp/.cjm/manifests/cjm-graph-plugin-sqlite.json\n[PluginManager] Discovered manifest: cjm-text-plugin-nltk from /mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-fasthtml-workflow-transcript-decomp/.cjm/manifests/cjm-text-plugin-nltk.json\n\n\nDiscovered 6 plugins\n\nRegistered providers: 1\n  - External: whisper_transcriptions (transcription_db)\n\n\n\n# Test has_provider_for_path for duplicate detection\nhas_dup, existing_name = source_service.has_provider_for_path(whisper_db)\nprint(f\"Checking if whisper_db is already loaded:\")\nprint(f\"  Has duplicate: {has_dup}\")\nprint(f\"  Existing provider: {existing_name}\")\n\n# Test with a path not yet added\nrandom_path = \"/some/random/path.db\"\nhas_dup2, existing_name2 = source_service.has_provider_for_path(random_path)\nprint(f\"\\nChecking random path:\")\nprint(f\"  Has duplicate: {has_dup2}\")\n\nChecking if whisper_db is already loaded:\n  Has duplicate: True\n  Existing provider: External: whisper_transcriptions\n\nChecking random path:\n  Has duplicate: False\n\n\n\n# Test query_transcriptions (backward-compatible method)\nrecords = source_service.query_transcriptions(limit=3)\nprint(f\"Found {len(records)} transcription records via SourceService\")\n\nfor rec in records:\n    print(f\"\\n  record_id: {rec['record_id']}\")\n    print(f\"  provider_id: {rec['provider_id']}\")\n    print(f\"  text preview: {rec['text'][:60]}...\")\n\nFound 3 transcription records via SourceService\n\n  record_id: job_9065e18d\n  provider_id: external:/mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-plugin-system/.cjm/data/cjm-transcription-plugin-whisper/whisper_transcriptions.db\n  text preview: Laying Plans Sun Tzu said, The art of war is of vital import...\n\n  record_id: job_a0b718cc\n  provider_id: external:/mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-plugin-system/.cjm/data/cjm-transcription-plugin-whisper/whisper_transcriptions.db\n  text preview: Laying Plans Sun Tzu said, The art of war is of vital import...\n\n  record_id: job_3cbae8d3\n  provider_id: external:/mnt/SN850X_8TB_EXT4/Projects/GitHub/cj-mills/cjm-plugin-system/.cjm/data/cjm-transcription-plugin-whisper/whisper_transcriptions.db\n  text preview: Laying Plans Sun Tzu said, The art of war is of vital import...\n\n\n\n# Test get_source_blocks with multiple selections\nif len(records) &gt;= 2:\n    selections = [\n        {'record_id': records[0]['record_id'], 'provider_id': records[0]['provider_id']},\n        {'record_id': records[1]['record_id'], 'provider_id': records[1]['provider_id']}\n    ]\n    \n    blocks = source_service.get_source_blocks(selections)\n    print(f\"Retrieved {len(blocks)} SourceBlocks via SourceService:\")\n    for i, block in enumerate(blocks):\n        print(f\"\\n  Block {i}:\")\n        print(f\"    id: {block.id}\")\n        print(f\"    text preview: {block.text[:50]}...\")\n\nRetrieved 2 SourceBlocks via SourceService:\n\n  Block 0:\n    id: job_9065e18d\n    text preview: Laying Plans Sun Tzu said, The art of war is of vi...\n\n  Block 1:\n    id: job_a0b718cc\n    text preview: Laying Plans Sun Tzu said, The art of war is of vi...",
+    "crumbs": [
+      "services",
+      "source"
+    ]
+  },
+  {
+    "objectID": "models.html",
+    "href": "models.html",
+    "title": "models",
+    "section": "",
+    "text": "TypedDict for Phase 1 workflow state. Provides type safety for the state structure used by the selection step.\n\nsource\n\n\n\ndef SelectionStepState(\n    args:VAR_POSITIONAL, kwargs:VAR_KEYWORD\n):\n\nState for Phase 1: Source Selection & Ordering.",
+    "crumbs": [
+      "models"
+    ]
+  },
+  {
+    "objectID": "models.html#selectionstepstate",
+    "href": "models.html#selectionstepstate",
+    "title": "models",
+    "section": "",
+    "text": "TypedDict for Phase 1 workflow state. Provides type safety for the state structure used by the selection step.\n\nsource\n\n\n\ndef SelectionStepState(\n    args:VAR_POSITIONAL, kwargs:VAR_KEYWORD\n):\n\nState for Phase 1: Source Selection & Ordering.",
+    "crumbs": [
+      "models"
+    ]
+  },
+  {
+    "objectID": "models.html#selectionurls",
+    "href": "models.html#selectionurls",
+    "title": "models",
+    "section": "SelectionUrls",
+    "text": "SelectionUrls\nURL bundle for Phase 1 selection handlers and renderers. All fields default to empty strings for safe construction before routes are registered.\n\nsource\n\nSelectionUrls\n\ndef SelectionUrls(\n    add:str='', remove:str='', reorder:str='', clear:str='', select_all:str='', preview:str='',\n    toggle_focused:str='', keyboard_reorder:str='', filter:str='', grouping_change:str='', browse_directory:str='',\n    add_external:str='', remove_external:str='', tab_switch:str=''\n)-&gt;None:\n\nURL bundle for Phase 1 selection route handlers and renderers.",
+    "crumbs": [
+      "models"
+    ]
+  },
+  {
+    "objectID": "services/source_utils.html",
+    "href": "services/source_utils.html",
+    "title": "source_utils",
+    "section": "",
+    "text": "source\n\n\n\ndef extract_batch_id(\n    metadata:Any, # Metadata dict or JSON string\n)-&gt;str: # Batch ID or \"No Batch ID\"\n\nExtract batch_id from transcription metadata.\n\nsource\n\n\n\n\ndef extract_model_name(\n    metadata:Any, # Metadata dict or JSON string\n)-&gt;str: # Formatted model name for display\n\nExtract and format model name from transcription metadata.",
+    "crumbs": [
+      "services",
+      "source_utils"
+    ]
+  },
+  {
+    "objectID": "services/source_utils.html#metadata-extraction",
+    "href": "services/source_utils.html#metadata-extraction",
+    "title": "source_utils",
+    "section": "",
+    "text": "source\n\n\n\ndef extract_batch_id(\n    metadata:Any, # Metadata dict or JSON string\n)-&gt;str: # Batch ID or \"No Batch ID\"\n\nExtract batch_id from transcription metadata.\n\nsource\n\n\n\n\ndef extract_model_name(\n    metadata:Any, # Metadata dict or JSON string\n)-&gt;str: # Formatted model name for display\n\nExtract and format model name from transcription metadata.",
+    "crumbs": [
+      "services",
+      "source_utils"
+    ]
+  },
+  {
+    "objectID": "services/source_utils.html#record-grouping",
+    "href": "services/source_utils.html#record-grouping",
+    "title": "source_utils",
+    "section": "Record Grouping",
+    "text": "Record Grouping\n\nsource\n\ngroup_transcriptions\n\ndef group_transcriptions(\n    transcriptions:List, # List of transcription records\n    group_by:str='media_path', # Grouping mode: \"media_path\" or \"batch_id\"\n)-&gt;Dict: # Grouped transcriptions\n\nGroup transcription records by the specified field.\n\nsource\n\n\ngroup_transcriptions_by_audio\n\ndef group_transcriptions_by_audio(\n    transcriptions:List, # List of transcription records\n)-&gt;Dict: # Grouped by media_path\n\nGroup transcription records by their source audio file.",
+    "crumbs": [
+      "services",
+      "source_utils"
+    ]
+  },
+  {
+    "objectID": "services/source_utils.html#selection-checks",
+    "href": "services/source_utils.html#selection-checks",
+    "title": "source_utils",
+    "section": "Selection Checks",
+    "text": "Selection Checks\n\nsource\n\nis_source_selected\n\ndef is_source_selected(\n    record_id:str, # Job ID to check\n    provider_id:str, # Provider ID to check\n    selected_sources:List, # List of selected sources\n)-&gt;bool: # True if source is selected\n\nCheck if a source is in the selected list by (record_id, provider_id) pair.\n\nsource\n\n\nget_selected_media_paths\n\ndef get_selected_media_paths(\n    selected_sources:List, # Current selections (record_id, provider_id)\n    all_transcriptions:List, # All available transcription records\n)-&gt;Set: # Media paths already represented in selections\n\nGet the set of media_paths for currently selected sources.",
+    "crumbs": [
+      "services",
+      "source_utils"
+    ]
+  },
+  {
+    "objectID": "services/source_utils.html#filtering",
+    "href": "services/source_utils.html#filtering",
+    "title": "source_utils",
+    "section": "Filtering",
+    "text": "Filtering\n\nsource\n\nfilter_transcriptions\n\ndef filter_transcriptions(\n    transcriptions:List, # List of transcription records to filter\n    search_text:str, # Search term for case-insensitive substring matching\n)-&gt;List: # Filtered transcription records\n\nFilter transcriptions by substring match across record_id, media_path, and text fields.",
+    "crumbs": [
+      "services",
+      "source_utils"
+    ]
+  },
+  {
+    "objectID": "services/source_utils.html#group-selection",
+    "href": "services/source_utils.html#group-selection",
+    "title": "source_utils",
+    "section": "Group Selection",
+    "text": "Group Selection\n\nsource\n\nselect_all_in_group\n\ndef select_all_in_group(\n    transcriptions:List, # All transcription records\n    group_key:str, # Group key to match against\n    grouping_mode:str, # Grouping mode: \"media_path\" or \"batch_id\"\n    selected_sources:List, # Current selections\n    excluded_media_paths:Optional=None, # Media paths to skip (already selected)\n)-&gt;List: # Updated selections with new items appended\n\nAdd all transcriptions matching a group key to the selection list, skipping duplicates.",
+    "crumbs": [
+      "services",
+      "source_utils"
+    ]
+  },
+  {
+    "objectID": "services/source_utils.html#selection-mutations",
+    "href": "services/source_utils.html#selection-mutations",
+    "title": "source_utils",
+    "section": "Selection Mutations",
+    "text": "Selection Mutations\n\nsource\n\ntoggle_source_selection\n\ndef toggle_source_selection(\n    record_id:str, # Job ID to toggle\n    provider_id:str, # Plugin name for the source\n    selected_sources:List, # Current selections\n)-&gt;List: # Updated selections\n\nToggle a source in or out of the selection list by (record_id, provider_id) pair.\n\nsource\n\n\nreorder_item\n\ndef reorder_item(\n    selected_sources:List, # Current selections\n    record_id:str, # Record ID of item to move\n    provider_id:str, # Provider ID of item to move\n    direction:str, # Direction: \"up\" or \"down\"\n)-&gt;List: # Reordered selections\n\nMove an item up or down in the selection list by swapping with its neighbor.\n\nsource\n\n\nreorder_sources\n\ndef reorder_sources(\n    selected_sources:List, # Current selections\n    new_order_ids:List, # Job IDs in desired order\n)-&gt;List: # Reordered selections\n\nReorder sources to match the given job ID order.",
+    "crumbs": [
+      "services",
+      "source_utils"
+    ]
+  },
+  {
+    "objectID": "services/source_utils.html#tab-navigation",
+    "href": "services/source_utils.html#tab-navigation",
+    "title": "source_utils",
+    "section": "Tab Navigation",
+    "text": "Tab Navigation\n\nsource\n\ncalculate_next_tab\n\ndef calculate_next_tab(\n    direction:str, # Direction: \"prev\", \"next\", or a direct tab name\n    current_tab:str, # Currently active tab name\n    tabs:List, # Available tab names in order\n)-&gt;str: # New active tab name\n\nCalculate the next tab based on direction or direct selection.",
+    "crumbs": [
+      "services",
+      "source_utils"
+    ]
+  },
+  {
+    "objectID": "services/source_utils.html#filesystem-checks",
+    "href": "services/source_utils.html#filesystem-checks",
+    "title": "source_utils",
+    "section": "Filesystem Checks",
+    "text": "Filesystem Checks\n\nsource\n\ncheck_audio_exists\n\ndef check_audio_exists(\n    media_path:str, # Path to audio file\n)-&gt;bool: # True if file exists\n\nCheck if the audio file exists at the given path.\n\nsource\n\n\nvalidate_browse_path\n\ndef validate_browse_path(\n    path:str, # Path to validate\n)-&gt;str: # Validated and resolved path, or home directory on error\n\nValidate a browse path for security. Returns home directory on invalid input.",
+    "crumbs": [
+      "services",
+      "source_utils"
+    ]
+  },
+  {
+    "objectID": "services/source_utils.html#tests",
+    "href": "services/source_utils.html#tests",
+    "title": "source_utils",
+    "section": "Tests",
+    "text": "Tests\n\nassert extract_batch_id(None) == \"No Batch ID\"\nassert extract_batch_id({\"batch_id\": \"batch_123\"}) == \"batch_123\"\nassert extract_batch_id('{\"batch_id\": \"batch_456\"}') == \"batch_456\"\nassert extract_batch_id({}) == \"No Batch ID\"\nprint(\"extract_batch_id tests passed\")\n\nextract_batch_id tests passed\n\n\n\nassert extract_model_name(None) == \"Unknown\"\nassert extract_model_name({\"model\": \"mistralai/Voxtral-Mini-3B\"}) == \"Voxtral-Mini-3B\"\nassert extract_model_name({\"model\": \"whisper-large\"}) == \"whisper-large\"\nassert extract_model_name({}) == \"Unknown\"\nprint(\"extract_model_name tests passed\")\n\nextract_model_name tests passed\n\n\n\nrecords = [\n    {\"record_id\": \"1\", \"media_path\": \"a.wav\"},\n    {\"record_id\": \"2\", \"media_path\": \"a.wav\"},\n    {\"record_id\": \"3\", \"media_path\": \"b.wav\"},\n]\ngroups = group_transcriptions(records)\nassert len(groups) == 2\nassert len(groups[\"a.wav\"]) == 2\nassert len(groups[\"b.wav\"]) == 1\nprint(\"group_transcriptions tests passed\")\n\ngroup_transcriptions tests passed\n\n\n\nsources = [{\"record_id\": \"a\", \"provider_id\": \"p1\"}, {\"record_id\": \"b\", \"provider_id\": \"p2\"}]\nassert is_source_selected(\"a\", \"p1\", sources) == True\nassert is_source_selected(\"a\", \"p2\", sources) == False  # Same record_id, different provider\nassert is_source_selected(\"c\", \"p1\", sources) == False\nprint(\"is_source_selected tests passed\")\n\n\nall_t = [\n    {\"record_id\": \"j1\", \"provider_id\": \"p1\", \"media_path\": \"a.wav\"},\n    {\"record_id\": \"j2\", \"provider_id\": \"p1\", \"media_path\": \"b.wav\"},\n    {\"record_id\": \"j3\", \"provider_id\": \"p2\", \"media_path\": \"c.wav\"},\n]\nselected = [{\"record_id\": \"j1\", \"provider_id\": \"p1\"}, {\"record_id\": \"j3\", \"provider_id\": \"p2\"}]\npaths = get_selected_media_paths(selected, all_t)\nassert paths == {\"a.wav\", \"c.wav\"}\n\n# Empty selections\nassert get_selected_media_paths([], all_t) == set()\n\n# Selection not in transcriptions (stale reference)\nassert get_selected_media_paths([{\"record_id\": \"jX\", \"provider_id\": \"pX\"}], all_t) == set()\n\nprint(\"get_selected_media_paths tests passed\")\n\n\nrecords = [\n    {\"record_id\": \"job_001\", \"media_path\": \"/data/podcast.wav\", \"text\": \"Hello world\"},\n    {\"record_id\": \"job_002\", \"media_path\": \"/data/lecture.wav\", \"text\": \"Machine learning intro\"},\n    {\"record_id\": \"job_003\", \"media_path\": \"/data/podcast.wav\", \"text\": \"Goodbye world\"},\n]\nassert len(filter_transcriptions(records, \"\")) == 3\nassert len(filter_transcriptions(records, \"  \")) == 3\nassert len(filter_transcriptions(records, \"podcast\")) == 2\nassert len(filter_transcriptions(records, \"PODCAST\")) == 2\nassert len(filter_transcriptions(records, \"machine\")) == 1\nassert len(filter_transcriptions(records, \"job_001\")) == 1\nassert len(filter_transcriptions(records, \"nonexistent\")) == 0\nprint(\"filter_transcriptions tests passed\")\n\nfilter_transcriptions tests passed\n\n\n\ntranscriptions = [\n    {\"record_id\": \"j1\", \"provider_id\": \"p1\", \"media_path\": \"a.wav\", \"metadata\": '{\"batch_id\": \"b1\"}'},\n    {\"record_id\": \"j2\", \"provider_id\": \"p1\", \"media_path\": \"a.wav\", \"metadata\": '{\"batch_id\": \"b1\"}'},\n    {\"record_id\": \"j3\", \"provider_id\": \"p2\", \"media_path\": \"b.wav\", \"metadata\": '{\"batch_id\": \"b2\"}'},\n]\n\n# Select all by media_path (no exclusion)\nresult = select_all_in_group(transcriptions, \"a.wav\", \"media_path\", [])\nassert len(result) == 2\nassert result[0][\"record_id\"] == \"j1\"\nassert result[1][\"record_id\"] == \"j2\"\n\n# Select all by batch_id\nresult = select_all_in_group(transcriptions, \"b1\", \"batch_id\", [])\nassert len(result) == 2\n\n# Deduplication: j1/p1 already selected\nresult = select_all_in_group(transcriptions, \"a.wav\", \"media_path\", [{\"record_id\": \"j1\", \"provider_id\": \"p1\"}])\nassert len(result) == 2\nassert result[0][\"record_id\"] == \"j1\"\nassert result[1][\"record_id\"] == \"j2\"\n\n# Same record_id from different provider is NOT a duplicate\nresult = select_all_in_group(transcriptions, \"a.wav\", \"media_path\", [{\"record_id\": \"j1\", \"provider_id\": \"p_other\"}])\nassert len(result) == 3  # existing + j1/p1 + j2/p1\n\n# No matches\nresult = select_all_in_group(transcriptions, \"nonexistent.wav\", \"media_path\", [])\nassert len(result) == 0\n\n# With excluded_media_paths: skip sources whose audio is already represented\nresult = select_all_in_group(transcriptions, \"a.wav\", \"media_path\", [], excluded_media_paths={\"a.wav\"})\nassert len(result) == 0  # All matching records share excluded media_path\n\n# excluded_media_paths with batch_id grouping across different audio files\nmixed = [\n    {\"record_id\": \"j1\", \"provider_id\": \"p1\", \"media_path\": \"a.wav\", \"metadata\": '{\"batch_id\": \"b1\"}'},\n    {\"record_id\": \"j2\", \"provider_id\": \"p1\", \"media_path\": \"b.wav\", \"metadata\": '{\"batch_id\": \"b1\"}'},\n]\nresult = select_all_in_group(mixed, \"b1\", \"batch_id\", [], excluded_media_paths={\"a.wav\"})\nassert len(result) == 1\nassert result[0][\"record_id\"] == \"j2\"  # Only b.wav source added\n\nprint(\"select_all_in_group tests passed\")\n\n\n# Toggle on: add new source\nsources = [{\"record_id\": \"a\", \"provider_id\": \"p1\"}]\nresult = toggle_source_selection(\"b\", \"p2\", sources)\nassert len(result) == 2\nassert result[1][\"record_id\"] == \"b\"\n\n# Toggle off: remove existing source\nresult = toggle_source_selection(\"a\", \"p1\", sources)\nassert len(result) == 0\n\n# Same record_id but different provider: adds (not toggle off)\nresult = toggle_source_selection(\"a\", \"p2\", sources)\nassert len(result) == 2\n\n# Original list is not mutated\nassert len(sources) == 1\n\nprint(\"toggle_source_selection tests passed\")\n\n\nsources = [\n    {\"record_id\": \"a\", \"provider_id\": \"p1\"}, \n    {\"record_id\": \"b\", \"provider_id\": \"p1\"}, \n    {\"record_id\": \"c\", \"provider_id\": \"p1\"}\n]\n\n# Move middle item up\nresult = reorder_item(sources, \"b\", \"p1\", \"up\")\nassert [s[\"record_id\"] for s in result] == [\"b\", \"a\", \"c\"]\n\n# Move middle item down\nresult = reorder_item(sources, \"b\", \"p1\", \"down\")\nassert [s[\"record_id\"] for s in result] == [\"a\", \"c\", \"b\"]\n\n# Move first item up (no-op)\nresult = reorder_item(sources, \"a\", \"p1\", \"up\")\nassert [s[\"record_id\"] for s in result] == [\"a\", \"b\", \"c\"]\n\n# Move last item down (no-op)\nresult = reorder_item(sources, \"c\", \"p1\", \"down\")\nassert [s[\"record_id\"] for s in result] == [\"a\", \"b\", \"c\"]\n\n# Item not found (no-op)\nresult = reorder_item(sources, \"x\", \"p1\", \"up\")\nassert [s[\"record_id\"] for s in result] == [\"a\", \"b\", \"c\"]\n\n# Original list is not mutated\nassert [s[\"record_id\"] for s in sources] == [\"a\", \"b\", \"c\"]\n\nprint(\"reorder_item tests passed\")\n\nreorder_item tests passed\n\n\n\nsources = [{\"record_id\": \"a\"}, {\"record_id\": \"b\"}, {\"record_id\": \"c\"}]\n\n# Normal reorder\nresult = reorder_sources(sources, [\"c\", \"a\", \"b\"])\nassert [s[\"record_id\"] for s in result] == [\"c\", \"a\", \"b\"]\n\n# Empty new_order_ids returns copy\nresult = reorder_sources(sources, [])\nassert [s[\"record_id\"] for s in result] == [\"a\", \"b\", \"c\"]\n\n# Unknown IDs in new_order are skipped\nresult = reorder_sources(sources, [\"b\", \"x\", \"a\"])\nassert [s[\"record_id\"] for s in result] == [\"b\", \"a\", \"c\"]\n\n# Missing IDs from new_order are appended\nresult = reorder_sources(sources, [\"c\"])\nassert [s[\"record_id\"] for s in result] == [\"c\", \"a\", \"b\"]\n\nprint(\"reorder_sources tests passed\")\n\nreorder_sources tests passed\n\n\n\ntabs = [\"db\", \"files\"]\n\n# Direct tab selection\nassert calculate_next_tab(\"db\", \"files\", tabs) == \"db\"\nassert calculate_next_tab(\"files\", \"db\", tabs) == \"files\"\n\n# Cycling forward\nassert calculate_next_tab(\"next\", \"db\", tabs) == \"files\"\nassert calculate_next_tab(\"next\", \"files\", tabs) == \"db\"\n\n# Cycling backward\nassert calculate_next_tab(\"prev\", \"db\", tabs) == \"files\"\nassert calculate_next_tab(\"prev\", \"files\", tabs) == \"db\"\n\n# Unknown current_tab defaults to index 0\nassert calculate_next_tab(\"next\", \"unknown\", tabs) == \"files\"\n\nprint(\"calculate_next_tab tests passed\")\n\ncalculate_next_tab tests passed\n\n\n\nimport os\nassert validate_browse_path(os.path.expanduser(\"~\")) == os.path.expanduser(\"~\")\nassert validate_browse_path(\"/nonexistent/path/xyz\") == os.path.expanduser(\"~\")\nprint(\"validate_browse_path tests passed\")\n\nvalidate_browse_path tests passed",
+    "crumbs": [
+      "services",
+      "source_utils"
+    ]
+  },
+  {
+    "objectID": "components/helpers.html#script-generation",
+    "href": "components/helpers.html#script-generation",
+    "title": "helpers",
+    "section": "Script Generation",
+    "text": "Script Generation",
+    "crumbs": [
+      "components",
+      "helpers"
+    ]
+  },
+  {
+    "objectID": "components/selection_queue.html#selection-queue",
+    "href": "components/selection_queue.html#selection-queue",
+    "title": "selection_queue",
+    "section": "Selection Queue",
+    "text": "Selection Queue",
+    "crumbs": [
+      "components",
+      "selection_queue"
+    ]
+  },
+  {
+    "objectID": "routes/core.html",
+    "href": "routes/core.html",
+    "title": "core",
+    "section": "",
+    "text": "These helpers provide typed access to the selection step state in route handlers and duplicate audio source prevention.",
+    "crumbs": [
+      "routes",
+      "core"
+    ]
+  },
+  {
+    "objectID": "routes/core.html#state-management-helpers",
+    "href": "routes/core.html#state-management-helpers",
+    "title": "core",
+    "section": "",
+    "text": "These helpers provide typed access to the selection step state in route handlers and duplicate audio source prevention.",
+    "crumbs": [
+      "routes",
+      "core"
+    ]
+  },
+  {
+    "objectID": "routes/core.html#queue-response-builder",
+    "href": "routes/core.html#queue-response-builder",
+    "title": "core",
+    "section": "Queue Response Builder",
+    "text": "Queue Response Builder\nShared response builder for handlers that mutate the selection queue. Covers three patterns:\n\nPattern A (default): queue + OOB stats + conditional OOB source list\nPattern B (include_stats=False, include_source_list=False): queue only\nPattern C (include_stats=False): queue + conditional OOB source list",
+    "crumbs": [
+      "routes",
+      "core"
+    ]
+  },
+  {
+    "objectID": "routes/init.html",
+    "href": "routes/init.html",
+    "title": "init",
+    "section": "",
+    "text": "source\n\n\n\ndef init_selection_routers(\n    state_store:SQLiteWorkflowStateStore, # The workflow state store\n    source_service:SourceService, # The source service for queries\n    workflow_id:str, # The workflow identifier\n    prefix:str, # Base prefix for selection routes (e.g., \"/workflow/selection\")\n)-&gt;Tuple: # (routers, urls, merged_routes)\n\nInitialize and return all selection routers with URL bundle.",
+    "crumbs": [
+      "routes",
+      "init"
+    ]
+  },
+  {
+    "objectID": "routes/init.html#router-assembly",
+    "href": "routes/init.html#router-assembly",
+    "title": "init",
+    "section": "",
+    "text": "source\n\n\n\ndef init_selection_routers(\n    state_store:SQLiteWorkflowStateStore, # The workflow state store\n    source_service:SourceService, # The source service for queries\n    workflow_id:str, # The workflow identifier\n    prefix:str, # Base prefix for selection routes (e.g., \"/workflow/selection\")\n)-&gt;Tuple: # (routers, urls, merged_routes)\n\nInitialize and return all selection routers with URL bundle.",
+    "crumbs": [
+      "routes",
+      "init"
+    ]
+  },
+  {
+    "objectID": "routes/filtering.html#grouping-handler",
+    "href": "routes/filtering.html#grouping-handler",
+    "title": "filtering",
+    "section": "Grouping Handler",
+    "text": "Grouping Handler",
+    "crumbs": [
+      "routes",
+      "filtering"
+    ]
+  },
+  {
+    "objectID": "routes/filtering.html#keyboard-handlers",
+    "href": "routes/filtering.html#keyboard-handlers",
+    "title": "filtering",
+    "section": "Keyboard Handlers",
+    "text": "Keyboard Handlers",
+    "crumbs": [
+      "routes",
+      "filtering"
+    ]
+  },
+  {
+    "objectID": "routes/filtering.html#router",
+    "href": "routes/filtering.html#router",
+    "title": "filtering",
+    "section": "Router",
+    "text": "Router\n\nsource\n\ninit_filtering_router\n\ndef init_filtering_router(\n    state_store:SQLiteWorkflowStateStore, # The workflow state store\n    workflow_id:str, # The workflow identifier\n    source_service:SourceService, # The source service for queries\n    prefix:str, # Route prefix (e.g., \"/workflow/selection/filtering\")\n    urls:SelectionUrls, # URL bundle for rendering\n)-&gt;Tuple: # (router, route_dict)\n\nInitialize filtering and keyboard navigation routes.",
+    "crumbs": [
+      "routes",
+      "filtering"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "cjm-transcript-source-select",
+    "section": "",
+    "text": "pip install cjm_transcript_source_select",
+    "crumbs": [
+      "cjm-transcript-source-select"
+    ]
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "cjm-transcript-source-select",
+    "section": "",
+    "text": "pip install cjm_transcript_source_select",
+    "crumbs": [
+      "cjm-transcript-source-select"
+    ]
+  },
+  {
+    "objectID": "index.html#project-structure",
+    "href": "index.html#project-structure",
+    "title": "cjm-transcript-source-select",
+    "section": "Project Structure",
+    "text": "Project Structure\nnbs/\n├── components/ (6)\n│   ├── helpers.ipynb          # Shared helper functions for the selection module\n│   ├── local_files.ipynb      # Local files browser for importing external .db files\n│   ├── preview_panel.ipynb    # Collapsible preview panel for displaying selected content\n│   ├── selection_queue.ipynb  # Selection queue component with drag-drop reordering\n│   ├── source_browser.ipynb   # Source browser components for displaying and filtering transcription sources\n│   └── step_renderer.ipynb    # Phase 1 step renderer: Source Selection & Ordering with two-column layout and collapsible preview\n├── routes/ (6)\n│   ├── core.ipynb         # Selection step state management helpers\n│   ├── filtering.ipynb    # Filtering, grouping, and keyboard navigation route handlers\n│   ├── init.ipynb         # Router assembly for Phase 1 selection routes\n│   ├── local_files.ipynb  # Local files browser route handlers\n│   ├── queue.ipynb        # Selection queue route handlers for Phase 1\n│   └── tabs.ipynb         # Tab switching route handlers\n├── services/ (2)\n│   ├── source.ipynb        # Source service for federated transcription queries via DuckDB\n│   └── source_utils.ipynb  # Source record operations for metadata extraction, grouping, and validation\n├── html_ids.ipynb  # HTML ID constants for Phase 1: Source Selection & Ordering\n├── models.ipynb    # Data models and URL bundles for Phase 1: Source Selection & Ordering\n└── utils.ipynb     # Display formatting and word counting utilities for the selection step\nTotal: 17 notebooks across 3 directories",
+    "crumbs": [
+      "cjm-transcript-source-select"
+    ]
+  },
+  {
+    "objectID": "index.html#module-dependencies",
+    "href": "index.html#module-dependencies",
+    "title": "cjm-transcript-source-select",
+    "section": "Module Dependencies",
+    "text": "Module Dependencies\ngraph LR\n    components_helpers[components.helpers&lt;br/&gt;helpers]\n    components_local_files[components.local_files&lt;br/&gt;local_files]\n    components_preview_panel[components.preview_panel&lt;br/&gt;preview_panel]\n    components_selection_queue[components.selection_queue&lt;br/&gt;selection_queue]\n    components_source_browser[components.source_browser&lt;br/&gt;source_browser]\n    components_step_renderer[components.step_renderer&lt;br/&gt;step_renderer]\n    html_ids[html_ids&lt;br/&gt;html_ids]\n    models[models&lt;br/&gt;models]\n    routes_core[routes.core&lt;br/&gt;core]\n    routes_filtering[routes.filtering&lt;br/&gt;filtering]\n    routes_init[routes.init&lt;br/&gt;init]\n    routes_local_files[routes.local_files&lt;br/&gt;local_files]\n    routes_queue[routes.queue&lt;br/&gt;queue]\n    routes_tabs[routes.tabs&lt;br/&gt;tabs]\n    services_source[services.source&lt;br/&gt;source]\n    services_source_utils[services.source_utils&lt;br/&gt;source_utils]\n    utils[utils&lt;br/&gt;utils]\n\n    components_helpers --&gt; models\n    components_local_files --&gt; components_helpers\n    components_local_files --&gt; html_ids\n    components_preview_panel --&gt; html_ids\n    components_selection_queue --&gt; html_ids\n    components_source_browser --&gt; services_source_utils\n    components_source_browser --&gt; utils\n    components_source_browser --&gt; html_ids\n    components_step_renderer --&gt; components_source_browser\n    components_step_renderer --&gt; utils\n    components_step_renderer --&gt; components_preview_panel\n    components_step_renderer --&gt; components_local_files\n    components_step_renderer --&gt; components_helpers\n    components_step_renderer --&gt; components_selection_queue\n    components_step_renderer --&gt; html_ids\n    components_step_renderer --&gt; models\n    routes_core --&gt; services_source\n    routes_core --&gt; models\n    routes_core --&gt; html_ids\n    routes_core --&gt; components_source_browser\n    routes_core --&gt; components_selection_queue\n    routes_core --&gt; components_step_renderer\n    routes_filtering --&gt; services_source_utils\n    routes_filtering --&gt; components_source_browser\n    routes_filtering --&gt; routes_core\n    routes_filtering --&gt; services_source\n    routes_filtering --&gt; models\n    routes_init --&gt; services_source\n    routes_init --&gt; models\n    routes_init --&gt; routes_tabs\n    routes_init --&gt; routes_filtering\n    routes_init --&gt; routes_local_files\n    routes_init --&gt; routes_queue\n    routes_init --&gt; routes_core\n    routes_local_files --&gt; services_source\n    routes_local_files --&gt; routes_core\n    routes_local_files --&gt; components_local_files\n    routes_local_files --&gt; models\n    routes_queue --&gt; services_source\n    routes_queue --&gt; services_source_utils\n    routes_queue --&gt; routes_core\n    routes_queue --&gt; components_preview_panel\n    routes_queue --&gt; models\n    routes_tabs --&gt; components_source_browser\n    routes_tabs --&gt; components_step_renderer\n    routes_tabs --&gt; routes_core\n    routes_tabs --&gt; services_source\n    routes_tabs --&gt; services_source_utils\n    routes_tabs --&gt; routes_local_files\n    routes_tabs --&gt; components_local_files\n    routes_tabs --&gt; models\n51 cross-module dependencies detected",
+    "crumbs": [
+      "cjm-transcript-source-select"
+    ]
+  },
+  {
+    "objectID": "index.html#cli-reference",
+    "href": "index.html#cli-reference",
+    "title": "cjm-transcript-source-select",
+    "section": "CLI Reference",
+    "text": "CLI Reference\nNo CLI commands found in this project.",
+    "crumbs": [
+      "cjm-transcript-source-select"
+    ]
+  },
+  {
+    "objectID": "index.html#module-overview",
+    "href": "index.html#module-overview",
+    "title": "cjm-transcript-source-select",
+    "section": "Module Overview",
+    "text": "Module Overview\nDetailed documentation for each module in the project:\n\ncore (core.ipynb)\n\nSelection step state management helpers\n\n\nImport\nfrom cjm_transcript_source_select.routes.core import (\n    DEBUG_SELECTION_STATE,\n    WorkflowStateStore\n)\n\n\nFunctions\ndef _get_step_state(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    session_id: str  # Session identifier string\n) -&gt; Dict[str, Any]:  # Step state dictionary\n    \"Get the selection step state from the workflow state store.\"\ndef _find_duplicate_media_source(\n    source_service: SourceService,  # Source service for lookups\n    record_id: str,  # Candidate record ID\n    provider_id: str,  # Candidate provider ID\n    selected_sources: List[Dict[str, str]],  # Current selections\n) -&gt; Optional[Dict[str, str]]:  # Conflicting source dict or None\n    \"Find an already-selected source that shares the same audio file.\"\ndef _render_duplicate_flash(\n    candidate_record_id: str,  # Record ID of the row the user clicked\n    candidate_provider_id: str,  # Provider ID of the row the user clicked\n    existing_record_id: str,  # Record ID of the conflicting selected row\n    existing_provider_id: str,  # Provider ID of the conflicting selected row\n) -&gt; Div:  # OOB Div with flash script (replaces previous via innerHTML swap)\n    \"Render a fixed-ID container with flash script for two source rows.\"\ndef _get_active_source_tab(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    session_id: str  # Session identifier string\n) -&gt; str:  # Active tab: \"db\" or \"files\"\n    \"Get the currently active source tab from workflow state.\"\ndef _build_queue_response(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for querying transcriptions\n    session_id: str,  # Session identifier string\n    selected_sources: List[Dict[str, str]],  # Current selected sources after mutation\n    urls: SelectionUrls,  # URL bundle for rendering\n    include_stats: bool = True,  # Include OOB stats swap\n    include_source_list: bool = True,  # Include conditional OOB source list swap\n    grouping_mode: str = None,  # Override grouping mode for source list rendering\n) -&gt; Union[Any, Tuple]:  # Single component or tuple of components with OOB swaps\n    \"Build the standard response for queue-mutating handlers.\"\ndef _update_step_state(\n    \"Update the selection step state in the workflow state store.\"\n\n\nVariables\nDEBUG_SELECTION_STATE = False\n\n\n\nfiltering (filtering.ipynb)\n\nFiltering, grouping, and keyboard navigation route handlers\n\n\nImport\nfrom cjm_transcript_source_select.routes.filtering import (\n    init_filtering_router\n)\n\n\nFunctions\ndef _handle_source_filter(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    search: str,  # Search term from input\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Filtered source list component\n    \"Filter transcription sources by search term.\"\ndef _handle_grouping_change(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    grouping_mode: str,  # New grouping mode: \"media_path\" or \"batch_id\"\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Updated source list component\n    \"Change the grouping mode and re-render the source list.\"\ndef _handle_selection_toggle_focused(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    record_id: str,  # Job ID from focused row (via hx-include)\n    provider_id: str,  # Plugin name from focused row (via hx-include)\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Queue component with OOB stats, optionally with OOB source list\n    \"Toggle selection of the focused row (keyboard shortcut handler).\"\ndef _handle_keyboard_reorder(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    record_id: str,  # Record ID of item to move\n    provider_id: str,  # Provider ID of item to move\n    direction: str,  # Direction to move: \"up\" or \"down\"\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Queue component, optionally with OOB source list\n    \"Move an item up or down in the selection queue via keyboard.\"\ndef init_filtering_router(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    prefix: str,  # Route prefix (e.g., \"/workflow/selection/filtering\")\n    urls: SelectionUrls,  # URL bundle for rendering\n) -&gt; Tuple[APIRouter, Dict[str, Callable]]:  # (router, route_dict)\n    \"Initialize filtering and keyboard navigation routes.\"\n\n\n\nhelpers (helpers.ipynb)\n\nShared helper functions for the selection module\n\n\nImport\nfrom cjm_transcript_source_select.components.helpers import *\n\n\nFunctions\ndef _get_selection_state(\n    ctx: InteractionContext  # Interaction context with state\n) -&gt; SelectionStepState:  # Typed selection step state\n    \"Get the full selection step state from context.\"\ndef _get_selected_sources(\n    ctx: InteractionContext  # Interaction context with state\n) -&gt; List[SelectedSource]:  # List of selected source dicts\n    \"Get the list of selected sources from step state.\"\ndef _get_grouping_mode(\n    ctx: InteractionContext  # Interaction context with state\n) -&gt; str:  # Grouping mode: \"media_path\" or \"batch_id\"\n    \"Get the current grouping mode from step state.\"\ndef _generate_sortable_init_script(\n    container_selector: str = \".sortable\",  # CSS selector for sortable containers\n    handle_selector: str = \".drag-handle\",  # CSS selector for drag handles\n    animation_ms: int = 150,  # Animation duration in milliseconds\n) -&gt; str:  # JavaScript initialization script\n    \"Generate Sortable.js initialization script for htmx integration.\"\n\n\n\nhtml_ids (html_ids.ipynb)\n\nHTML ID constants for Phase 1: Source Selection & Ordering\n\n\nImport\nfrom cjm_transcript_source_select.html_ids import (\n    SelectionHtmlIds\n)\n\n\nClasses\nclass SelectionHtmlIds:\n    \"HTML ID constants for Phase 1: Source Selection & Ordering.\"\n    \n    def as_selector(\n            id_str:str  # The HTML ID to convert\n        ) -&gt; str:  # CSS selector with # prefix\n        \"Convert an ID to a CSS selector format.\"\n    \n    def source_checkbox(\n            record_id:str,  # Record identifier\n            provider_id:str  # Provider identifier\n        ) -&gt; str:  # HTML ID for the source checkbox\n        \"Generate HTML ID for a source selection checkbox.\"\n    \n    def source_row(\n            record_id:str,  # Record identifier\n            provider_id:str  # Provider identifier\n        ) -&gt; str:  # HTML ID for the source row\n        \"Generate HTML ID for a source browser row.\"\n    \n    def queue_item(\n            record_id:str,  # Record identifier\n            provider_id:str  # Provider identifier\n        ) -&gt; str:  # HTML ID for the queue item\n        \"Generate HTML ID for a queue item.\"\n\n\n\ninit (init.ipynb)\n\nRouter assembly for Phase 1 selection routes\n\n\nImport\nfrom cjm_transcript_source_select.routes.init import (\n    init_selection_routers\n)\n\n\nFunctions\ndef init_selection_routers(\n    state_store: WorkflowStateStore,  # The workflow state store\n    source_service: SourceService,  # The source service for queries\n    workflow_id: str,  # The workflow identifier\n    prefix: str,  # Base prefix for selection routes (e.g., \"/workflow/selection\")\n) -&gt; Tuple[List[APIRouter], SelectionUrls, Dict[str, Callable]]:  # (routers, urls, merged_routes)\n    \"Initialize and return all selection routers with URL bundle.\"\n\n\n\nlocal_files (local_files.ipynb)\n\nLocal files browser for importing external .db files\n\n\nImport\nfrom cjm_transcript_source_select.components.local_files import *\n\n\nFunctions\ndef _get_external_db_paths(\n    ctx: InteractionContext  # Interaction context with state\n) -&gt; List[str]:  # List of external database paths\n    \"Get the list of external database paths from step state.\"\ndef _get_current_browse_path(\n    ctx: InteractionContext  # Interaction context with state\n) -&gt; str:  # Current browse path\n    \"Get the current browse path from step state.\"\ndef _get_file_browser_state(\n    step_state: Dict[str, Any],  # Selection step state dictionary\n    default_path: Optional[str] = None  # Default path if no state exists\n) -&gt; BrowserState:  # BrowserState for file browser\n    \"Get or create BrowserState from step state.\"\ndef _create_db_browser_config() -&gt; FileBrowserConfig:  # Configured FileBrowserConfig for .db file selection\n    \"Create file browser config for .db file selection.\"\ndef _render_external_sources_list(\n    external_paths: List[str],  # List of added external database paths\n    remove_url: str,  # URL for removing external source\n) -&gt; Any:  # External sources list component\n    \"Render the list of added external database sources with scrollable paths.\"\ndef _render_local_files_browser(\n    browser_state: Optional[BrowserState] = None,  # Current browser state\n    external_paths: Optional[List[str]] = None,  # List of added external database paths\n    provider: Optional[LocalFileSystemProvider] = None,  # File system provider\n    config: Optional[FileBrowserConfig] = None,  # Browser configuration\n    navigate_url: str = \"\",  # URL for browsing directories\n    select_url: str = \"\",  # URL for adding external source (maps path to db_path)\n    remove_url: str = \"\",  # URL for removing external source\n    refresh_url: str = \"\",  # URL for refreshing browser\n    path_input_url: str = \"\",  # URL for direct path input\n    home_path: Optional[str] = None,  # Home directory path\n    error_message: Optional[str] = None,  # Error message to display\n) -&gt; Any:  # Local files browser component\n    \"Render the local files browser for adding external .db files.\"\n\n\n\nlocal_files (local_files.ipynb)\n\nLocal files browser route handlers\n\n\nImport\nfrom cjm_transcript_source_select.routes.local_files import (\n    init_local_files_router\n)\n\n\nFunctions\ndef _get_local_files_provider() -&gt; LocalFileSystemProvider:\n    \"\"\"Get or create the local files provider singleton.\"\"\"\n    global _local_files_provider\n    if _local_files_provider is None\n    \"Get or create the local files provider singleton.\"\ndef _handle_browse_directory(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for external db ops\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    path: str,  # Directory path to browse\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Local files browser component\n    \"Browse a directory and return the local files browser component.\"\ndef _get_local_files_config() -&gt; FileBrowserConfig:\n    \"\"\"Get or create the local files config singleton.\"\"\"\n    global _local_files_config\n    if _local_files_config is None\n    \"Get or create the local files config singleton.\"\ndef _handle_add_external_source(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for external db ops\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    path: str,  # Path to the .db file (from file-browser select_url)\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Local files browser component\n    \"Toggle an external database source (add if not present, remove if present).\"\ndef _handle_remove_external_source(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for external db ops\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    db_path: str,  # Path to the .db file to remove\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Local files browser component\n    \"Remove an external database source from the Added Sources list.\"\ndef init_local_files_router(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for external db ops\n    prefix: str,  # Route prefix (e.g., \"/workflow/selection/local_files\")\n    urls: SelectionUrls,  # URL bundle for rendering\n) -&gt; Tuple[APIRouter, Dict[str, Callable]]:  # (router, route_dict)\n    \"Initialize local files browser routes.\"\n\n\nVariables\n_local_files_provider: Optional[LocalFileSystemProvider] = None\n_local_files_config: Optional[FileBrowserConfig] = None\n\n\n\nmodels (models.ipynb)\n\nData models and URL bundles for Phase 1: Source Selection & Ordering\n\n\nImport\nfrom cjm_transcript_source_select.models import (\n    SelectionStepState,\n    SelectionUrls\n)\n\n\nClasses\nclass SelectionStepState(TypedDict):\n    \"State for Phase 1: Source Selection & Ordering.\"\n@dataclass\nclass SelectionUrls:\n    \"URL bundle for Phase 1 selection route handlers and renderers.\"\n    \n    add: str = ''  # Add source to queue\n    remove: str = ''  # Remove source from queue\n    reorder: str = ''  # Reorder queue items\n    clear: str = ''  # Clear all from queue\n    select_all: str = ''  # Select all in a group\n    preview: str = ''  # Preview source content\n    toggle_focused: str = ''  # Toggle focused row selection\n    keyboard_reorder: str = ''  # Keyboard reorder (Shift+Up/Down)\n    filter: str = ''  # Filter source list\n    grouping_change: str = ''  # Change grouping mode\n    browse_directory: str = ''  # Browse directory\n    add_external: str = ''  # Add external .db source\n    remove_external: str = ''  # Remove external .db source\n    tab_switch: str = ''  # Switch source tabs\n\n\n\npreview_panel (preview_panel.ipynb)\n\nCollapsible preview panel for displaying selected content\n\n\nImport\nfrom cjm_transcript_source_select.components.preview_panel import *\n\n\nFunctions\ndef _render_preview_panel(\n    preview_record_id: Optional[str] = None,  # Job ID being previewed\n    preview_text: Optional[str] = None,  # Text content to preview\n    is_open: bool = False,  # Whether the collapse should be open\n) -&gt; Any:  # Preview panel component (collapsible, full-width)\n    \"Render the collapsible preview panel for displaying selected content.\"\n\n\n\nqueue (queue.ipynb)\n\nSelection queue route handlers for Phase 1\n\n\nImport\nfrom cjm_transcript_source_select.routes.queue import (\n    init_queue_router\n)\n\n\nFunctions\ndef _handle_selection_add(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    record_id: str,  # Job ID to add\n    provider_id: str,  # Plugin name for the source\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Queue component with OOB stats, optionally with OOB source list\n    \"Add a source to the selection queue.\"\ndef _handle_selection_remove(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    record_id: str,  # Job ID to remove\n    provider_id: str,  # Plugin name for the source\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Queue component with OOB stats, optionally with OOB source list\n    \"Remove a source from the selection queue.\"\nasync def _handle_selection_reorder(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Updated queue component\n    \"Reorder items in the selection queue based on SortableJS result.\"\ndef _handle_selection_clear(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Queue component with OOB stats, optionally with OOB source list\n    \"Clear all items from the selection queue.\"\ndef _handle_selection_select_all(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    group_key: str,  # Group key to select all transcriptions for\n    grouping_mode: str,  # Current grouping mode: \"media_path\" or \"batch_id\"\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Queue component with OOB stats, optionally with OOB source list\n    \"Select all transcriptions for a given group, skipping duplicate audio sources.\"\ndef _handle_selection_preview(\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    record_id: str,  # Job ID to preview\n    provider_id: str,  # Plugin name for the source\n):  # Full preview panel component (collapsible, open with content)\n    \"Get preview panel for a selected source.\"\ndef init_queue_router(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    prefix: str,  # Route prefix (e.g., \"/workflow/selection/queue\")\n    urls: SelectionUrls,  # URL bundle for rendering (populated after all routers created)\n) -&gt; Tuple[APIRouter, Dict[str, Callable]]:  # (router, route_dict)\n    \"Initialize queue management routes.\"\n\n\n\nselection_queue (selection_queue.ipynb)\n\nSelection queue component with drag-drop reordering\n\n\nImport\nfrom cjm_transcript_source_select.components.selection_queue import *\n\n\nFunctions\ndef _render_queue_item(\n    source: Dict[str, str],  # Source dict with record_id and provider_id\n    index: int,  # Position in queue (1-based)\n    remove_url: str,  # URL for removing from queue\n) -&gt; Any:  # Queue item element\n    \"Render a single item in the selection queue.\"\ndef _render_selection_queue(\n    selected_sources: List[Dict[str, str]],  # List of selected sources in order\n    remove_url: str,  # URL for removing from queue\n    reorder_url: str,  # URL for reordering queue\n    clear_url: str,  # URL for clearing all\n) -&gt; Any:  # Queue panel component\n    \"Render the selection queue panel with drag-drop reordering.\"\n\n\n\nsource (source.ipynb)\n\nSource service for federated transcription queries via DuckDB\n\n\nImport\nfrom cjm_transcript_source_select.services.source import (\n    VALID_DB_EXTENSIONS,\n    TranscriptionDBProvider,\n    SourceService,\n    validate_and_toggle_external_db\n)\n\n\nFunctions\ndef validate_and_toggle_external_db(\n    source_service: SourceService,  # Source service for duplicate detection\n    path: str,  # Path to the .db file\n    external_paths: List[str],  # Current external database paths\n    valid_extensions: List[str] = None,  # Valid file extensions (default: VALID_DB_EXTENSIONS)\n) -&gt; Tuple[List[str], Optional[str]]:  # (updated_paths, error_message or None)\n    \"Validate and toggle an external database path in the external paths list.\"\n\n\nClasses\nclass TranscriptionDBProvider:\n    def __init__(\n        self,\n        db_path: str,  # Path to SQLite database file\n        name: str,  # Display name for this provider\n        provider_id: Optional[str] = None  # Unique ID (defaults to db_path)\n    )\n    \"SourceProvider for transcription SQLite databases.\"\n    \n    def __init__(\n            self,\n            db_path: str,  # Path to SQLite database file\n            name: str,  # Display name for this provider\n            provider_id: Optional[str] = None  # Unique ID (defaults to db_path)\n        )\n        \"Initialize provider for a transcription database.\"\n    \n    def provider_id(self) -&gt; str:  # Unique identifier\n            \"\"\"Unique identifier for this provider instance.\"\"\"\n            return self._id\n        \n        @property\n        def provider_name(self) -&gt; str:  # Display name\n        \"Unique identifier for this provider instance.\"\n    \n    def provider_name(self) -&gt; str:  # Display name\n            \"\"\"Human-readable name for display.\"\"\"\n            return self._name\n        \n        @property\n        def provider_type(self) -&gt; str:  # Provider category\n        \"Human-readable name for display.\"\n    \n    def provider_type(self) -&gt; str:  # Provider category\n            \"\"\"Provider type category.\"\"\"\n            return \"transcription_db\"\n        \n        @property\n        def db_path(self) -&gt; Path:  # Database file path\n        \"Provider type category.\"\n    \n    def db_path(self) -&gt; Path:  # Database file path\n            \"\"\"Path to the underlying database file.\"\"\"\n            return self._db_path\n        \n        def is_available(self) -&gt; bool:  # Whether database exists and is accessible\n        \"Path to the underlying database file.\"\n    \n    def is_available(self) -&gt; bool:  # Whether database exists and is accessible\n            \"\"\"Check if the database file exists and is accessible.\"\"\"\n            return self._db_path.exists() and self._db_path.suffix == '.db'\n        \n        def validate_schema(self) -&gt; Tuple[bool, str]:  # (is_valid, error_message)\n        \"Check if the database file exists and is accessible.\"\n    \n    def validate_schema(self) -&gt; Tuple[bool, str]:  # (is_valid, error_message)\n            \"\"\"Check if database has valid transcription schema.\"\"\"\n            if not self.is_available()\n        \"Check if database has valid transcription schema.\"\n    \n    def query_records(\n            self,\n            limit: int = 100  # Maximum records to return\n        ) -&gt; List[SourceRecord]:  # List of source records\n        \"Query transcription records from the database.\"\n    \n    def get_source_block(\n            self,\n            record_id: str  # Job ID to fetch\n        ) -&gt; Optional[SourceBlock]:  # SourceBlock or None if not found\n        \"Fetch a specific transcription as a SourceBlock.\"\n    \n    def from_plugin(\n            cls,\n            meta: PluginMeta  # Plugin metadata with manifest containing db_path\n        ) -&gt; Optional[\"TranscriptionDBProvider\"]:  # Provider or None if no valid db_path\n        \"Create provider from plugin metadata.\"\n    \n    def from_external_path(\n            cls,\n            path: str  # Path to external database file\n        ) -&gt; Optional[\"TranscriptionDBProvider\"]:  # Provider or None if path invalid\n        \"Create provider from an external database path.\"\nclass SourceService:\n    def __init__(\n        self,\n        plugin_manager: PluginManager,  # Plugin manager for discovering plugin sources\n        source_categories: List[str] = None,  # Plugin categories to query (default: ['transcription'])\n        external_paths: List[str] = None  # External database paths\n    )\n    \"Service for federated access to content sources via providers.\"\n    \n    def __init__(\n            self,\n            plugin_manager: PluginManager,  # Plugin manager for discovering plugin sources\n            source_categories: List[str] = None,  # Plugin categories to query (default: ['transcription'])\n            external_paths: List[str] = None  # External database paths\n        )\n        \"Initialize the source service.\"\n    \n    def add_provider(\n            self,\n            provider: SourceProvider  # Provider instance to add\n        ) -&gt; bool:  # True if added, False if ID already exists\n        \"Add a source provider.\"\n    \n    def remove_provider(\n            self,\n            provider_id: str  # ID of provider to remove\n        ) -&gt; bool:  # True if removed, False if not found\n        \"Remove a source provider by ID.\"\n    \n    def get_provider(\n            self,\n            provider_id: str  # ID of provider to get\n        ) -&gt; Optional[SourceProvider]:  # Provider or None if not found\n        \"Get a provider by ID.\"\n    \n    def get_providers(self) -&gt; List[SourceProvider]:  # List of all providers\n            \"\"\"Get all registered providers.\"\"\"\n            return list(self._providers.values())\n        \n        def get_provider_by_name(\n            self,\n            name: str  # Provider name to search for\n        ) -&gt; Optional[SourceProvider]:  # Provider or None if not found\n        \"Get all registered providers.\"\n    \n    def get_provider_by_name(\n            self,\n            name: str  # Provider name to search for\n        ) -&gt; Optional[SourceProvider]:  # Provider or None if not found\n        \"Find a provider by its display name.\"\n    \n    def has_provider_for_path(\n            self,\n            path: str  # Path to check\n        ) -&gt; Tuple[bool, Optional[str]]:  # (has_duplicate, existing_provider_name)\n        \"Check if any provider uses the same resolved database path.\"\n    \n    def add_plugin_providers(self) -&gt; int:  # Number of providers added\n            \"\"\"Discover and add providers from loaded plugins.\"\"\"\n            added = 0\n            for category in self._categories\n        \"Discover and add providers from loaded plugins.\"\n    \n    def set_external_paths(\n            self,\n            paths: List[str]  # List of external database paths to set\n        ) -&gt; None\n        \"Set external database paths (replaces existing external providers).\"\n    \n    def add_external_path(\n            self,\n            path: str  # External database path to add\n        ) -&gt; bool:  # True if added, False if already exists or invalid\n        \"Add an external database as a provider.\"\n    \n    def remove_external_path(\n            self,\n            path: str  # External database path to remove\n        ) -&gt; bool:  # True if removed, False if not found\n        \"Remove an external database provider.\"\n    \n    def get_external_paths(self) -&gt; List[str]:  # List of external database paths\n            \"\"\"Get list of external database paths.\"\"\"\n            paths = []\n            for pid, provider in self._providers.items()\n        \"Get list of external database paths.\"\n    \n    def get_available_sources(self) -&gt; List[Dict[str, Any]]:  # List of source info dicts\n            \"\"\"Get list of available sources (for UI display).\"\"\"\n            # First ensure plugin providers are loaded\n            self.add_plugin_providers()\n            \n            sources = []\n            for provider in self._providers.values()\n        \"Get list of available sources (for UI display).\"\n    \n    def query_transcriptions(\n            self,\n            provider_name: Optional[str] = None,  # Filter by provider name (None for all)\n            limit: int = 100  # Maximum number of results per provider\n        ) -&gt; List[Dict[str, Any]]:  # List of transcription records\n        \"Query records from all providers (or a specific one).\"\n    \n    def get_transcription_by_id(\n            self,\n            record_id: str,  # Record ID to fetch\n            provider_id: str  # Provider ID that owns this record\n        ) -&gt; Optional[SourceBlock]:  # SourceBlock or None if not found\n        \"Get a specific transcription as a SourceBlock.\"\n    \n    def get_source_blocks(\n            self,\n            selections: List[Dict[str, str]]  # List of {record_id, provider_id} dicts\n        ) -&gt; List[SourceBlock]:  # Ordered list of SourceBlocks\n        \"Fetch multiple records as SourceBlocks in order.\"\n\n\nVariables\nVALID_DB_EXTENSIONS = [3 items]\n\n\n\nsource_browser (source_browser.ipynb)\n\nSource browser components for displaying and filtering transcription sources\n\n\nImport\nfrom cjm_transcript_source_select.components.source_browser import *\n\n\nFunctions\ndef _render_grouping_selector(\n    grouping_mode: str,  # Current grouping mode: \"media_path\" or \"batch_id\"\n    grouping_change_url: str,  # URL for changing grouping mode\n) -&gt; Any:  # Grouping selector component\n    \"Render the dropdown for selecting grouping mode.\"\ndef _render_source_row(\n    record: Dict[str, Any],  # Transcription record\n    is_selected: bool,  # Whether this source is selected\n    add_url: str,  # URL for adding to queue\n    remove_url: str,  # URL for removing from queue\n    preview_url: str,  # URL for previewing content\n    is_first: bool = False,  # Whether this is the first row (gets initial focus)\n    row_index: int = 0,  # Index among selectable rows (for keyboard focus sync)\n) -&gt; Any:  # Table row element\n    \"Render a single source row in the browser table.\"\ndef _render_group_header(\n    group_key: str,  # The group key (media_path or batch_id value)\n    record_count: int,  # Number of records in this group\n    select_all_url: str,  # URL for selecting all in group\n    grouping_mode: str = \"media_path\",  # Current grouping mode\n) -&gt; Any:  # Table row for group header\n    \"Render a group header row.\"\ndef _render_audio_group_header(\n    media_path: str,  # Path to audio file\n    record_count: int,  # Number of records in this group\n    select_all_url: str,  # URL for selecting all in group\n) -&gt; Any:  # Table row for group header\n    \"Render a group header row for an audio file (legacy wrapper).\"\ndef _render_source_list(\n    transcriptions: List[Dict[str, Any]],  # Available transcription records\n    selected_sources: List[Dict[str, str]],  # Currently selected sources\n    add_url: str,  # URL for adding to queue\n    remove_url: str,  # URL for removing from queue\n    preview_url: str,  # URL for previewing content\n    select_all_url: str,  # URL for selecting all in a group\n    grouping_mode: str = \"media_path\",  # Grouping mode: \"media_path\" or \"batch_id\"\n    oob: bool = False,  # Whether to include hx-swap-oob for out-of-band swap\n) -&gt; Any:  # Source list container with table\n    \"Render the source list table with grouped rows.\"\ndef _render_source_browser(\n    transcriptions: List[Dict[str, Any]],  # Available transcription records\n    sources: List[Dict[str, Any]],  # Available source plugins (unused, kept for API compat)\n    selected_sources: List[Dict[str, str]],  # Currently selected sources\n    add_url: str,  # URL for adding to queue\n    remove_url: str,  # URL for removing from queue\n    preview_url: str,  # URL for previewing content\n    select_all_url: str,  # URL for selecting all in a group\n    filter_url: str,  # URL for filtering sources\n    grouping_mode: str = \"media_path\",  # Current grouping mode\n    grouping_change_url: str = \"\",  # URL for changing grouping mode\n) -&gt; Any:  # Source browser component\n    \"Render the source browser panel with search filtering and grouped table.\"\n\n\n\nsource_utils (source_utils.ipynb)\n\nSource record operations for metadata extraction, grouping, and validation\n\n\nImport\nfrom cjm_transcript_source_select.services.source_utils import (\n    extract_batch_id,\n    extract_model_name,\n    group_transcriptions,\n    group_transcriptions_by_audio,\n    is_source_selected,\n    get_selected_media_paths,\n    filter_transcriptions,\n    select_all_in_group,\n    toggle_source_selection,\n    reorder_item,\n    reorder_sources,\n    calculate_next_tab,\n    check_audio_exists,\n    validate_browse_path\n)\n\n\nFunctions\ndef extract_batch_id(\n    metadata: Any  # Metadata dict or JSON string\n) -&gt; str:  # Batch ID or \"No Batch ID\"\n    \"Extract batch_id from transcription metadata.\"\ndef extract_model_name(\n    metadata: Any  # Metadata dict or JSON string\n) -&gt; str:  # Formatted model name for display\n    \"Extract and format model name from transcription metadata.\"\ndef group_transcriptions(\n    transcriptions: List[Dict[str, Any]],  # List of transcription records\n    group_by: str = \"media_path\"  # Grouping mode: \"media_path\" or \"batch_id\"\n) -&gt; Dict[str, List[Dict[str, Any]]]:  # Grouped transcriptions\n    \"Group transcription records by the specified field.\"\ndef group_transcriptions_by_audio(\n    transcriptions: List[Dict[str, Any]]  # List of transcription records\n) -&gt; Dict[str, List[Dict[str, Any]]]:  # Grouped by media_path\n    \"Group transcription records by their source audio file.\"\ndef is_source_selected(\n    record_id: str,  # Job ID to check\n    provider_id: str,  # Provider ID to check\n    selected_sources: List[Dict[str, str]]  # List of selected sources\n) -&gt; bool:  # True if source is selected\n    \"Check if a source is in the selected list by (record_id, provider_id) pair.\"\ndef get_selected_media_paths(\n    selected_sources: List[Dict[str, str]],  # Current selections (record_id, provider_id)\n    all_transcriptions: List[Dict[str, Any]],  # All available transcription records\n) -&gt; Set[str]:  # Media paths already represented in selections\n    \"Get the set of media_paths for currently selected sources.\"\ndef filter_transcriptions(\n    transcriptions: List[Dict[str, Any]],  # List of transcription records to filter\n    search_text: str,  # Search term for case-insensitive substring matching\n) -&gt; List[Dict[str, Any]]:  # Filtered transcription records\n    \"Filter transcriptions by substring match across record_id, media_path, and text fields.\"\ndef select_all_in_group(\n    transcriptions: List[Dict[str, Any]],  # All transcription records\n    group_key: str,  # Group key to match against\n    grouping_mode: str,  # Grouping mode: \"media_path\" or \"batch_id\"\n    selected_sources: List[Dict[str, str]],  # Current selections\n    excluded_media_paths: Optional[Set[str]] = None,  # Media paths to skip (already selected)\n) -&gt; List[Dict[str, str]]:  # Updated selections with new items appended\n    \"Add all transcriptions matching a group key to the selection list, skipping duplicates.\"\ndef toggle_source_selection(\n    record_id: str,  # Job ID to toggle\n    provider_id: str,  # Plugin name for the source\n    selected_sources: List[Dict[str, str]],  # Current selections\n) -&gt; List[Dict[str, str]]:  # Updated selections\n    \"Toggle a source in or out of the selection list by (record_id, provider_id) pair.\"\ndef reorder_item(\n    selected_sources: List[Dict[str, str]],  # Current selections\n    record_id: str,  # Record ID of item to move\n    provider_id: str,  # Provider ID of item to move\n    direction: str,  # Direction: \"up\" or \"down\"\n) -&gt; List[Dict[str, str]]:  # Reordered selections\n    \"Move an item up or down in the selection list by swapping with its neighbor.\"\ndef reorder_sources(\n    selected_sources: List[Dict[str, str]],  # Current selections\n    new_order_ids: List[str],  # Job IDs in desired order\n) -&gt; List[Dict[str, str]]:  # Reordered selections\n    \"Reorder sources to match the given job ID order.\"\ndef calculate_next_tab(\n    direction: str,  # Direction: \"prev\", \"next\", or a direct tab name\n    current_tab: str,  # Currently active tab name\n    tabs: List[str],  # Available tab names in order\n) -&gt; str:  # New active tab name\n    \"Calculate the next tab based on direction or direct selection.\"\ndef check_audio_exists(\n    media_path: str  # Path to audio file\n) -&gt; bool:  # True if file exists\n    \"Check if the audio file exists at the given path.\"\ndef validate_browse_path(\n    path: str  # Path to validate\n) -&gt; str:  # Validated and resolved path, or home directory on error\n    \"Validate a browse path for security. Returns home directory on invalid input.\"\n\n\n\nstep_renderer (step_renderer.ipynb)\n\nPhase 1 step renderer: Source Selection & Ordering with two-column layout and collapsible preview\n\n\nImport\nfrom cjm_transcript_source_select.components.step_renderer import (\n    SD_FOCUSED_RECORD_ID_INPUT,\n    SD_FOCUSED_PROVIDER_ID_INPUT,\n    SD_TOGGLE_BTN,\n    SD_REMOVE_BTN,\n    SD_REORDER_UP_BTN,\n    SD_REORDER_DOWN_BTN,\n    SD_TAB_PREV_BTN,\n    SD_TAB_NEXT_BTN,\n    SD_PREVIEW_BTN,\n    render_selection_step\n)\n\n\nFunctions\ndef _create_selection_keyboard_manager() -&gt; ZoneManager:  # Configured keyboard zone manager\n    \"Create the keyboard zone manager for Phase 1 selection step.\"\ndef _render_selection_keyboard_hints(\n    manager: ZoneManager,  # Keyboard zone manager with actions configured\n) -&gt; Any:  # Collapsible keyboard hints component\n    \"Render keyboard shortcut hints in a collapsible container.\"\ndef _render_selection_stats(\n    selected_sources: List[Dict[str, str]],  # Selected sources\n    transcriptions: List[Dict[str, Any]],  # All transcriptions (for word count)\n    oob: bool = False,  # Whether to render as OOB swap\n) -&gt; Any:  # Stats component\n    \"Render the selection statistics (word count and source count).\"\ndef _render_selection_footer(\n    selected_sources: List[Dict[str, str]],  # Selected sources\n    transcriptions: List[Dict[str, Any]],  # All transcriptions (for word count)\n) -&gt; Any:  # Footer component\n    \"Render the footer with statistics and continue button.\"\ndef _render_tab_headers(\n    active_tab: str,  # Currently active tab ('db' or 'files')\n    tab_switch_url: str = \"\",  # URL for switching tabs via HTMX\n    oob: bool = False,  # Whether to render as OOB swap\n) -&gt; Any:  # Tab headers container\n    \"Render the tab header radio inputs.\"\ndef _render_source_tabs(\n    active_tab: str,  # Currently active tab ('db' or 'files')\n    active_content: Any,  # Content for the currently active tab\n    tab_switch_url: str = \"\",  # URL for switching tabs via HTMX\n) -&gt; Any:  # Tabs header + separate content container\n    \"Render source type tabs with a single shared content container.\"\ndef _get_step_renderer_provider() -&gt; LocalFileSystemProvider:\n    \"\"\"Get or create the local files provider for step renderer.\"\"\"\n    global _step_renderer_provider\n    if _step_renderer_provider is None\n    \"Get or create the local files provider for step renderer.\"\ndef _get_step_renderer_config():\n    \"\"\"Get or create the local files config for step renderer.\"\"\"\n    global _step_renderer_config\n    if _step_renderer_config is None\n    \"Get or create the local files config for step renderer.\"\ndef render_selection_step(\n    sources: List[Dict[str, Any]],  # Available source plugins\n    transcriptions: List[Dict[str, Any]],  # Available transcription records\n    selected_sources: List[Dict[str, str]],  # Ordered selection\n    grouping_mode: str,  # Grouping mode: \"media_path\" or \"batch_id\"\n    external_db_paths: List[str],  # External database paths\n    file_browser_state: Dict[str, Any],  # Serialized BrowserState from file-browser library\n    active_tab: str,  # Active tab: \"db\" or \"files\"\n    urls: SelectionUrls,  # URL bundle for selection routes\n) -&gt; Any:  # FastHTML component\n    \"Render Phase 1: Source Selection & Ordering step with two-column layout.\"\n\n\nVariables\nSD_FOCUSED_RECORD_ID_INPUT = 'sd-focused-record-id'\nSD_FOCUSED_PROVIDER_ID_INPUT = 'sd-focused-provider-id'\nSD_TOGGLE_BTN = 'sd-toggle-btn'\nSD_REMOVE_BTN = 'sd-remove-btn'\nSD_REORDER_UP_BTN = 'sd-reorder-up-btn'\nSD_REORDER_DOWN_BTN = 'sd-reorder-down-btn'\nSD_TAB_PREV_BTN = 'sd-tab-prev-btn'\nSD_TAB_NEXT_BTN = 'sd-tab-next-btn'\nSD_PREVIEW_BTN = 'sd-preview-btn'\n_step_renderer_provider: Optional[LocalFileSystemProvider] = None\n\n\n\ntabs (tabs.ipynb)\n\nTab switching route handlers\n\n\nImport\nfrom cjm_transcript_source_select.routes.tabs import (\n    init_tabs_router\n)\n\n\nFunctions\ndef _handle_tab_switch(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    request,  # FastHTML request object\n    sess,  # FastHTML session object\n    direction: str,  # Direction: \"prev\", \"next\", \"db\", or \"files\"\n    urls: SelectionUrls,  # URL bundle for rendering\n):  # Tuple of inner content and OOB tab headers\n    \"Switch between Plugin DB and Local Files tabs.\"\ndef init_tabs_router(\n    state_store: WorkflowStateStore,  # The workflow state store\n    workflow_id: str,  # The workflow identifier\n    source_service: SourceService,  # The source service for queries\n    prefix: str,  # Route prefix (e.g., \"/workflow/selection/tabs\")\n    urls: SelectionUrls,  # URL bundle for rendering\n) -&gt; Tuple[APIRouter, Dict[str, Callable]]:  # (router, route_dict)\n    \"Initialize tab switching routes.\"\n\n\n\nutils (utils.ipynb)\n\nDisplay formatting and word counting utilities for the selection step\n\n\nImport\nfrom cjm_transcript_source_select.utils import (\n    count_words,\n    format_date,\n    format_audio_filename\n)\n\n\nFunctions\ndef count_words(\n    text: str  # Text to count words in\n) -&gt; int:  # Word count\n    \"Count the number of whitespace-delimited words in text.\"\ndef format_date(\n    created_at: str  # ISO date string, Unix timestamp, or similar\n) -&gt; str:  # Formatted date for display\n    \"Format a date string for human-readable display (e.g., 'Jan 20, 2026').\"\ndef format_audio_filename(\n    audio_path: str  # Full path to audio file\n) -&gt; str:  # Shortened filename for display\n    \"Extract and format the filename from a path.\"",
+    "crumbs": [
+      "cjm-transcript-source-select"
+    ]
+  }
+]
