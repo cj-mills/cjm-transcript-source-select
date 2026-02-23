@@ -39,7 +39,6 @@ from cjm_fasthtml_tailwind.utilities.interactivity import cursor
 from cjm_fasthtml_tailwind.utilities.flexbox_and_grid import (
     flex_display, flex_direction, justify, items, gap, grow
 )
-from cjm_fasthtml_tailwind.utilities.transitions_and_animation import transition, duration
 from cjm_fasthtml_tailwind.core.base import combine_classes
 
 # Local imports
@@ -84,6 +83,7 @@ def _render_source_row(
     remove_url: str,  # URL for removing from queue
     preview_url: str,  # URL for previewing content
     is_first: bool = False,  # Whether this is the first row (gets initial focus)
+    row_index: int = 0,  # Index among selectable rows (for keyboard focus sync)
 ) -> Any:  # Table row element
     """Render a single source row in the browser table."""
     record_id = record.get("record_id", "")
@@ -139,6 +139,10 @@ def _render_source_row(
         cls=combine_classes(tooltip, tooltip_placement.top)
     )
     
+    # Click handler to sync keyboard focus with clicked row
+    zone_id = SelectionHtmlIds.SOURCE_LIST
+    focus_onclick = f"if(window.kbNav)window.kbNav.setItemFocus('{zone_id}',{row_index},true)"
+    
     return Tr(
         # Hidden cell for keyboard action data (must be in TD for valid HTML)
         Td(
@@ -178,15 +182,14 @@ def _render_source_row(
         cls=combine_classes(
             bg_dui.primary.opacity(10) if is_selected else "",
             bg_dui.base_200.hover,
-            cursor.pointer,
-            transition.colors,
-            duration(200)
+            cursor.pointer
         ),
         tabindex="0",
         data_selectable="true",
         data_focused="true" if is_first else "false",
         data_record_id=record_id,
         data_provider_id=provider_id,
+        onclick=focus_onclick,
         hx_get=preview_url,
         hx_vals=json.dumps({"record_id": record_id, "provider_id": provider_id}),
         hx_target=SelectionHtmlIds.as_selector(SelectionHtmlIds.PREVIEW_PANEL),
@@ -254,7 +257,7 @@ def _render_source_list(
     
     # Build table rows
     table_rows = []
-    is_first_record = True
+    row_index = 0
     for group_key, records in grouped.items():
         # Add group header
         table_rows.append(_render_group_header(
@@ -268,9 +271,10 @@ def _render_source_list(
             )
             table_rows.append(_render_source_row(
                 record, is_selected, add_url, remove_url, preview_url,
-                is_first=is_first_record
+                is_first=(row_index == 0),
+                row_index=row_index,
             ))
-            is_first_record = False
+            row_index += 1
     
     return Div(
         Table(

@@ -8,7 +8,7 @@ __all__ = ['DEBUG_SELECTION_STATE', 'WorkflowStateStore']
 # %% ../../nbs/routes/core.ipynb #sel-core-imports
 from typing import List, Dict, Any, Optional, Tuple, Union
 
-from fasthtml.common import Script
+from fasthtml.common import Div, Script
 
 from cjm_workflow_state.state_store import SQLiteWorkflowStateStore
 
@@ -63,26 +63,46 @@ def _render_duplicate_flash(
     candidate_provider_id: str,  # Provider ID of the row the user clicked
     existing_record_id: str,  # Record ID of the conflicting selected row
     existing_provider_id: str,  # Provider ID of the conflicting selected row
-) -> Script:  # OOB script element for flash animation
-    """Render a self-removing Script that briefly flashes two source rows with error color."""
+) -> Div:  # OOB Div with flash script (replaces previous via innerHTML swap)
+    """Render a fixed-ID container with flash script for two source rows."""
     row1 = SelectionHtmlIds.source_row(candidate_record_id, candidate_provider_id)
     row2 = SelectionHtmlIds.source_row(existing_record_id, existing_provider_id)
-    return Script(f"""
+    return Div(
+        Script(f"""
 (function() {{
-    var s = document.currentScript;
-    var r1 = document.getElementById('{row1}');
-    var r2 = document.getElementById('{row2}');
-    [r1, r2].forEach(function(r) {{
-        if (r) {{ r.classList.add('bg-error'); }}
-    }});
-    setTimeout(function() {{
+    function flash() {{
+        var r1 = document.getElementById('{row1}');
+        var r2 = document.getElementById('{row2}');
         [r1, r2].forEach(function(r) {{
-            if (r) {{ r.classList.remove('bg-error'); }}
+            if (r) {{
+                r.style.transition = 'background-color 0.05s ease-in';
+                r.classList.add('bg-error');
+            }}
         }});
-        if (s) {{ s.remove(); }}
-    }}, 400);
+        setTimeout(function() {{
+            [r1, r2].forEach(function(r) {{
+                if (r) {{
+                    r.style.transition = 'background-color 0.3s ease-out';
+                    r.classList.remove('bg-error');
+                }}
+            }});
+            setTimeout(function() {{
+                [r1, r2].forEach(function(r) {{
+                    if (r) {{ r.style.transition = ''; }}
+                }});
+            }}, 300);
+        }}, 600);
+    }}
+    // Defer until after HTMX finishes all OOB swaps
+    document.body.addEventListener('htmx:afterSettle', function handler() {{
+        document.body.removeEventListener('htmx:afterSettle', handler);
+        flash();
+    }});
 }})();
-""")
+"""),
+        id=SelectionHtmlIds.SCRIPT_RUNNER,
+        hx_swap_oob="innerHTML",
+    )
 
 # %% ../../nbs/routes/core.ipynb #3zll5oy1hsc
 def _get_active_source_tab(

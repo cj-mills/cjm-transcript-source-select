@@ -570,6 +570,9 @@ def render_selection_step(
         # Sortable initialization script (htmx integration)
         sortable_script,
         
+        # Script runner for OOB-triggered JS (duplicate rejection flash)
+        Div(id=SelectionHtmlIds.SCRIPT_RUNNER),
+        
         id=SelectionHtmlIds.SOURCE_SELECTOR,
         cls=combine_classes(
             w.full,

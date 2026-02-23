@@ -62,6 +62,9 @@ class SelectionHtmlIds:
     SELECTION_FOOTER = "sd-selection-footer"
     SELECTION_STATS = "sd-selection-stats"
 
+    # Script runner (OOB container for flash feedback scripts)
+    SCRIPT_RUNNER = "sd-selection-script-runner"
+
     @staticmethod
     def _safe_id(
         value:str  # Raw value to sanitize for HTML ID use
